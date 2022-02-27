@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class AudioControl : MonoBehaviour
 {
-    // Start is called before the first frame update
     AudioSource aud;
     float currentTime = 0;
     float duration = 2;
@@ -16,10 +15,11 @@ public class AudioControl : MonoBehaviour
         aud = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Handles volume fading in and out between scenes
+    /// </summary>
     void Update()
     {
-
         if (currentTime < duration)
         {
             currentTime += Time.deltaTime;
@@ -36,6 +36,7 @@ public class AudioControl : MonoBehaviour
     internal void Fade(float transitionTime)
     {
         currentTime = Time.time;
+        duration = transitionTime;
         fade = true;
     }
 }

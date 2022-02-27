@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealingWave : Module
+public class HealingWave : StatusEffect
 {
     public double strength;
 

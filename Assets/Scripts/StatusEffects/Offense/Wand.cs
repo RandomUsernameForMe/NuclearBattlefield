@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wand : Module
+public class Wand : StatusEffect
 {
 
     public override Action ProcessEvent(Action action)

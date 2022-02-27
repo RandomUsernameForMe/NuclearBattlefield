@@ -13,10 +13,12 @@ public class UpgradeHolder : MonoBehaviour
     {
         transform.Find("DescriptionPanel").gameObject.SetActive(false);
     }
+
     public void OnExit()
     {
         transform.Find("DescriptionPanel").gameObject.SetActive(false);
     }
+    
     public void OnEnter()
     {
         txt.text = upg.descriptionText;

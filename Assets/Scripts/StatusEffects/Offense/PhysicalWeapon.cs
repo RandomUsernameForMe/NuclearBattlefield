@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhysicalWeapon : Module
+public class PhysicalWeapon : StatusEffect
 {
     public double atkDmg;
 

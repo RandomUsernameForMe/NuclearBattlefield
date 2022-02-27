@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hitter : Module
+public class Hitter : StatusEffect
 {
     public Animator animator;
     void Start()

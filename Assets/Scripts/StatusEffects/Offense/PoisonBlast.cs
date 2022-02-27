@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PoisonBlast: Module
+public class PoisonBlast: StatusEffect
 {
     public double potency;
     public int duration;

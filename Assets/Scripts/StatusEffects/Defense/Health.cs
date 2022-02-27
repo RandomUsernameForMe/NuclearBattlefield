@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : Module
+public class Health : StatusEffect
 {
     public double health;
     public double maxHealth;

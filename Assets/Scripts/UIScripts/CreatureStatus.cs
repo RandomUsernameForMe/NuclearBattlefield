@@ -7,7 +7,6 @@ public class CreatureStatus : MonoBehaviour
 {
     public Text health;
     public GameObject canvas;
-
     private Creature creature;
 
     // Start is called before the first frame update
@@ -16,7 +15,6 @@ public class CreatureStatus : MonoBehaviour
         canvas.SetActive(false);
         UpdateUI();
     }
-
 
     /// <summary>
     /// Generates and updates the current status efects tooltip for the creature

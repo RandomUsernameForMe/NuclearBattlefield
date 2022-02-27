@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mortal : Module
+public class Mortal : StatusEffect
 {
 
     public override Action ProcessEvent(Action action)

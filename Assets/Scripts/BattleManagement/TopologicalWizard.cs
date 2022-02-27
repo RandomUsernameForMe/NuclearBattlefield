@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class TopologicalWizard : MonoBehaviour
 {
-    private List<Module> list;
+    private List<StatusEffect> list;
     private Dictionary<Type,List<Type>> adj = new Dictionary<Type, List<Type>>();
     private List<Type> answers;
     
     void Awake()
     {
-        list = new List<Module>(GetComponents<Module>());
+        list = new List<StatusEffect>(GetComponents<StatusEffect>());
         foreach (var item in list)
         {
             adj.Add(item.GetType(),new List<Type>());

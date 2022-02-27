@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldBash : Module
+public class ShieldBash : StatusEffect
 {
     public float bashStrength;
     public int stunDuration;

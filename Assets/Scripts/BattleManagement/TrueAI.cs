@@ -12,6 +12,10 @@ public class TrueAI : Controller
         manager = GetComponent<Battlemanager>();
     }
 
+    /// <summary>
+    /// General function to handle everything when computer wants to decide what to play
+    /// </summary>
+    /// <param name="creature"></param>
     public override void Activate(Creature creature)
     {
         Action action = GetAction(creature);
@@ -25,7 +29,8 @@ public class TrueAI : Controller
     /// </summary>
     /// <param name="creature">Current creature planning a move</param>
     /// <returns>Chosen action</returns>
-    public Action GetAction(Creature creature) {
+    public Action GetAction(Creature creature) 
+    {
         float rnd = UnityEngine.Random.value;
         var action = new Action(ID.AttackBuild);
         if (rnd > 0.5f) {
@@ -42,14 +47,13 @@ public class TrueAI : Controller
     /// </summary>
     /// <param name="action">Picked action</param>
     /// <returns>Targetted creature</returns>
-    public Creature GetTarget(Action action) {
-
+    public Creature GetTarget(Action action) 
+    {
         List<Ind> keys = new List<Ind>(action.prms.Keys);
         List<(int,int,bool)> pos = TargetingSystem.Evaluate(keys,true);
-
         var enemyfound = false;
-
         Creature cre = null;
+
         while (!enemyfound)
         {
             int rnd = UnityEngine.Random.Range(0, pos.Count);

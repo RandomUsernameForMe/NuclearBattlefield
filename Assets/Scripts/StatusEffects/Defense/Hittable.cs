@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hittable : Module
+public class Hittable : StatusEffect
 {
     public Animator animator;
 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LongWeapon : Module
+public class LongWeapon : StatusEffect
 {
 
     public override Action ProcessEvent(Action action)

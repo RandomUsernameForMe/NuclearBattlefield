@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destroyer : Module
+public class Destroyer : StatusEffect
 {
     public override List<(Type, Type)> GetRequirements()
     {

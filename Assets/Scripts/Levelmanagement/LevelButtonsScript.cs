@@ -8,15 +8,19 @@ public class LevelButtonsScript : MonoBehaviour
 {
     public GameObject panel1;
     public GameObject panel2;
+
+    // Start is called before the first frame update
     public void Start()
     {
         panel1.SetActive(false);
         panel2.SetActive(false);
     }
+
     public void RepeatOnExit()
     {
         panel1.SetActive(false);
     }
+
     public void RepeatOnEnter()
     {
         panel1.SetActive(true);
@@ -32,6 +36,7 @@ public class LevelButtonsScript : MonoBehaviour
     {
         panel2.SetActive(false);
     }
+
     public void NextOnEnter()
     {
         panel2.SetActive(true);

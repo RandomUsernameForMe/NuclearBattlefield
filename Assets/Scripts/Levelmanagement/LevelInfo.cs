@@ -20,11 +20,8 @@ public class LevelInfo : MonoBehaviour
         ResetPointsGain();
     }
 
-
     public void ResetPointsGain()
     {
         upgPointsGain = maxUpgPointsGain;
     }
-
-
 }

@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoisonResistance : Module
+public class PoisonResistance : StatusEffect
 {
+    /*
+    
+    */
     public double resistance;
 
     public override Action ProcessEvent(Action action)

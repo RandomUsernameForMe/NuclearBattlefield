@@ -12,6 +12,9 @@ public class Theatre : MonoBehaviour, IPointerClickHandler
 {
     List<Slide> list = new List<Slide>();
     Queue<Texture2D> toBePlayed = new Queue<Texture2D>();
+
+    // Im ashamed of this.
+    // These could be automatically generated from text.
     public Texture2D start;
     public Texture2D first1;
     public Texture2D first2;
@@ -24,7 +27,6 @@ public class Theatre : MonoBehaviour, IPointerClickHandler
     public Texture2D special2;
     public Texture2D special3;
     public Texture2D special4;
-
     public Texture2D special5;
     public Texture2D destroy1;
     public Texture2D destroy2;
@@ -43,7 +45,7 @@ public class Theatre : MonoBehaviour, IPointerClickHandler
         list.Add(new Slide(second2, 2));
         list.Add(new Slide(third1, 3));
 
-        // death related
+        // Death related
         list.Add(new Slide(special1, Ind.Dead,1,"Sonnie"));
         list.Add(new Slide(special2, Ind.Dead, 1, "Will"));
         list.Add(new Slide(special3, Ind.Dead, 1, "Moon"));
@@ -55,7 +57,7 @@ public class Theatre : MonoBehaviour, IPointerClickHandler
         list.Add(new Slide(destroy2, Ind.DestroyerUsed, 1, "Moon"));
         list.Add(new Slide(destroy3, Ind.DestroyerUsed, 2, "Moon"));
         list.Add(new Slide(destroy4, Ind.DestroyerUsed, 2, "Moon"));
-        PlayAllPossibleImages();
+        PreparePossibleImages();
     }
 
     private void OnEnable()
@@ -63,24 +65,25 @@ public class Theatre : MonoBehaviour, IPointerClickHandler
         LevelManager.OnBattleLoaded += Prep;
     }
 
+    /// <summary>
+    /// This is called every time a nev level is loaded and therefore I want to play all relevent messages
+    /// </summary>
     public void Prep()
     {
-        MakeTiny(false);
+        Minimize(false);
         gameObject.SetActive(true);
-        PlayAllPossibleImages();
+        PreparePossibleImages();
     }
 
-    void Update()
-    {
-    
-    }
-
-
+    /// <summary>
+    /// On pointer click I want to either switch to a new image or Minimize the window in case there are not any left.
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (toBePlayed.Count == 0)
         {
-            MakeTiny(true);
+            Minimize(true);
             GetComponent<Image>().sprite = null;
         }
         else
@@ -90,13 +93,16 @@ public class Theatre : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void MakeTiny(bool v)
+    /// <summary>
+    /// Called after all relevent images have been played
+    /// </summary>
+    /// <param name="v"></param>
+    private void Minimize(bool v)
     {
         var sc = gameObject.transform.parent.GetComponent<Canvas>();
         if (v)
         {
             gameObject.SetActive(false);
-
         }
         else
         {
@@ -104,7 +110,10 @@ public class Theatre : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void PlayAllPossibleImages()
+    /// <summary>
+    /// Each image has a corresponding condition and is prepared to show if its met.
+    /// </summary>
+    public void PreparePossibleImages()
     {
         gameObject.SetActive(true);
         foreach (var item in list)
@@ -123,6 +132,8 @@ public class Theatre : MonoBehaviour, IPointerClickHandler
         
     }
 }
+
+
 public class Slide
 {
     public Condition cond;
@@ -160,6 +171,10 @@ public abstract class Condition
     public abstract bool Passed(); 
 }
 
+
+/// <summary>
+/// Checks whether an object of specific name end cantains a specified StatusEffect
+/// </summary>
 public class HasStatus : Condition
 {
     Type t;
@@ -174,7 +189,7 @@ public class HasStatus : Condition
         var c = GameObject.Find(name);
         if (c!= null)
         {
-            var effects = c.GetComponentsInChildren<Module>();
+            var effects = c.GetComponentsInChildren<StatusEffect>();
             return Upgrader.Contains(effects, t);
         }
         else return false;
@@ -182,6 +197,9 @@ public class HasStatus : Condition
     }
 }
 
+/// <summary>
+/// Checks whether an object of specific name xontains a specific value of specific parameter. For example if health equals exactly 0.
+/// </summary>
 public class HasValue : Condition
 {
     public Ind i;
@@ -197,8 +215,6 @@ public class HasValue : Condition
     public override bool Passed()
     {
         var c = GameObject.Find(name);
-
-
         if (c != null)
         {
             var g = c.GetComponent<Creature>();
@@ -212,6 +228,9 @@ public class HasValue : Condition
     }
 }
 
+/// <summary>
+/// Checks the current level
+/// </summary>
 public class IsLevel : Condition
 {
     int level;

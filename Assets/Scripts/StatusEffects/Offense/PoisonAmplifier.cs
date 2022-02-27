@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoisonAmplifier : Module
+public class PoisonAmplifier : StatusEffect
 {
     public int power;
 

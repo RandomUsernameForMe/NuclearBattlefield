@@ -7,6 +7,9 @@ public class Winscript : MonoBehaviour
     public GameObject obj;
     public string str;
 
+    /// <summary>
+    /// Cheating intended for debugging
+    /// </summary>
     public void Update()
     {
         if (Input.GetKeyDown(str))
@@ -14,7 +17,7 @@ public class Winscript : MonoBehaviour
             winLevel();
         }
     }
-    // Start is called before the first frame update
+
     public void winLevel()
     {
         obj.SetActive(true);

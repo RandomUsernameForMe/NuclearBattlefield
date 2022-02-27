@@ -21,7 +21,7 @@ public class Upgrader : MonoBehaviour
     }
 
     /// <summary>
-    /// Main function generating and printinhg out all possible upgrades and corresponding UI buttons
+    /// Main function generating and printing out all possible upgrades and corresponding UI buttons
     /// </summary>
     public void Load()
     {
@@ -37,7 +37,9 @@ public class Upgrader : MonoBehaviour
         }
     }
 
-    // TODO: very inefficient
+    /// <summary>
+    ///  Very inefficent vay to always have current number of points 
+    /// </summary>
     public void Update()
     {
         points.text = "Upgrade Points: " + upgPoints;
@@ -51,11 +53,6 @@ public class Upgrader : MonoBehaviour
         }
     }
 
-    private void GetPoints()
-    {
-        upgPoints = GameObject.Find("LevelInfo").GetComponent<LevelInfo>().currUpgPoints;
-    }
-
     /// <summary>
     /// Given a creature, generate all possible available upgrades and present them out as buttons
     /// </summary>
@@ -63,7 +60,7 @@ public class Upgrader : MonoBehaviour
     /// <param name="offsetX">Coordinates for where to generate buttons</param>
     private void GenerateOptions(GameObject item, float offsetX)
     {        
-        var effects = item.gameObject.GetComponentsInChildren<Module>();
+        var effects = item.gameObject.GetComponentsInChildren<StatusEffect>();
         var options = new List<UpgradeBuilder>();
         
         // hard coded upgrade possibilities
@@ -117,7 +114,7 @@ public class Upgrader : MonoBehaviour
         }
     }
 
-    public static bool Contains(Module[] list, Type type)
+    public static bool Contains(StatusEffect[] list, Type type)
     {
         bool rv = false;
         for (int i = 0; i < list.Length; i++)
@@ -132,7 +129,13 @@ public class Upgrader : MonoBehaviour
         GameObject.Find("Upgrader").GetComponentInChildren<Upgrader>().upgPoints -= cost;
         GameObject.Find("LevelInfo").GetComponent<LevelInfo>().currUpgPoints -= cost;
     }
+
+    private void GetPoints()
+    {
+        upgPoints = GameObject.Find("LevelInfo").GetComponent<LevelInfo>().currUpgPoints;
+    }
 }
+
 
 
 // Didnt need and want a separate file for upgrades

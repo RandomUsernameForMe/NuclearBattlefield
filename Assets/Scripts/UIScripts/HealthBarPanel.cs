@@ -6,7 +6,11 @@ using UnityEngine.UI;
 public class HealthBarPanel : MonoBehaviour
 {
     public List<Slider> healthbars;
-    // Start is called before the first frame update
+
+    /// <summary>
+    /// Finds out 
+    /// </summary>
+    /// <param name="party"></param>
     public void RefreshPanel(Party party) {
 
         Slider healthbar;
@@ -18,7 +22,5 @@ public class HealthBarPanel : MonoBehaviour
             healthbar.gameObject.GetComponentInChildren<Text>().text = creature.creature_name;
             healthbar.value = (float) creature.GetHealth() /(float)creature.GetMaxHealth();
         }
-
-
     }
 }

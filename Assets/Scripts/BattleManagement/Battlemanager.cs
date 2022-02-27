@@ -13,18 +13,16 @@ public struct Position
 
     public double X { get; }
     public double Y { get; }
-
     public override string ToString() => $"({X}, {Y})";
 }
 
 public class Battlemanager : MonoBehaviour
 {
+
     public Party party;
-    public Party enemyParty;
-    
+    public Party enemyParty;    
     public Creature currentCreature;
     private UIManager ui;
-
     private float lastMove;
     private bool busy = false;
     public bool loaded = false;
@@ -33,7 +31,10 @@ public class Battlemanager : MonoBehaviour
     {
         Load();
     }
-
+    
+    /// <summary>
+    /// There is a minimum time required between two creatures playing
+    /// </summary>
     void Update()
     {
         if (Time.time - lastMove > 1 && !busy)
@@ -118,7 +119,7 @@ public class Battlemanager : MonoBehaviour
         var enemyCharacters = enemyParty.GetParty();
 
 
-        // Search for a character with highest speed that havent moved
+        // Search for a character with highest speed that havent moved this turn
         while (!found)
         {
             for (int i = 0; i < playerCharacters.Count; i++)
@@ -141,6 +142,7 @@ public class Battlemanager : MonoBehaviour
                 }
             }
             
+            // If no creature is found, refresh all speeds
             if (nextCreature == null) {
                 NewTurn();              
             }
@@ -156,7 +158,7 @@ public class Battlemanager : MonoBehaviour
 
         if (action.prms[Ind.CanAct] == 0)
         {
-            SetNextCreature(); // this is vulnerable to looping
+            SetNextCreature();
         }
         else
         {
@@ -164,6 +166,9 @@ public class Battlemanager : MonoBehaviour
         }       
     }    
 
+    /// <summary>
+    /// After all creatures have played, their speeds are refreshed and all timed status effects (like poison) trigger
+    /// </summary>
     void NewTurn() {
         party.Tick();
         enemyParty.Tick();

@@ -62,7 +62,7 @@ public class FightLoader: MonoBehaviour
                 break;
         }
 
-        // If thereis no party from previous scene, create a new one from a template
+        // If there is no party from previous scene, create a new one from a template
         var p = GameObject.Find("AllyParty");
         if (info.currLevel == 1 && p == null)
         {
@@ -72,8 +72,10 @@ public class FightLoader: MonoBehaviour
         }
         m.loaded = true;
     }
-
-    // TODO, this is very inefficent
+    
+    /// <summary>
+    /// Very intensive way to chech if any party has lost
+    /// </summary>
     private void Update()
     {
         if (PlayerWon())
@@ -85,15 +87,6 @@ public class FightLoader: MonoBehaviour
         {
             loseCanvas.SetActive(true);
         }
-    }
-
-    public void ResetLevel()
-    {
-        m.party.Reset();
-        m.enemyParty.Reset();
-        m.Skip();
-        winCanvas.SetActive(false);
-        loseCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -115,7 +108,6 @@ public class FightLoader: MonoBehaviour
         }
         return ded;
     }
-
 
     /// <summary>
     /// Decides whether al enemy creautres are dead
@@ -151,12 +143,24 @@ public class FightLoader: MonoBehaviour
     }
 
     /// <summary>
-    /// TODO
+    /// Triggers changing of scenes, used in case player wins
     /// </summary>
     public void NextLevel()
     {
         info.currUpgPoints = info.currUpgPoints +info.upgPointsGain;
         info.campfire = true;
         info.gameObject.GetComponent<LevelManager>().LoadCampFire();
+    }
+
+    /// <summary>
+    /// Resets everyting, used in case player loses
+    /// </summary>
+    public void ResetLevel()
+    {
+        m.party.Reset();
+        m.enemyParty.Reset();
+        m.Skip();
+        winCanvas.SetActive(false);
+        loseCanvas.SetActive(false);
     }
 }

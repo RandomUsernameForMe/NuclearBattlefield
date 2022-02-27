@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShortWeapon : Module
+public class ShortWeapon : StatusEffect
 {
 
     public override Action ProcessEvent(Action action)
