@@ -6,19 +6,19 @@ using UnityEngine;
 public class ShortWeapon : StatusEffect
 {
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.AttackBuild)
+        if (action.type == QueryType.AttackBuild)
         {
-            if (action.prms.ContainsKey(Ind.Basic))
+            if (action.parameters.ContainsKey(StatusParameter.Basic))
             {
                 //action.Add(Ind.Close, 1);
-                action.Add(Ind.Enemy, 1);
+                action.Add(StatusParameter.Enemy, 1);
             }            
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.Basic))
+            if (action.parameters.ContainsKey(StatusParameter.Basic))
             {
                 action.Add("Hits a close enemy.");
             }

@@ -12,22 +12,22 @@ public class PoisonAmplifier : StatusEffect
         return null;
     }
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.AttackBuild)
+        if (action.type == QueryType.AttackBuild)
         {
-            if (action.prms.ContainsKey(Ind.Basic))
+            if (action.parameters.ContainsKey(StatusParameter.Basic))
             {
-                action.Add(Ind.PoisonAmp, power);
+                action.Add(StatusParameter.PoisonAmp, power);
             }
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.Basic))
+            if (action.parameters.ContainsKey(StatusParameter.Basic))
             {
                 action.Add("If the enemy is poisoned, amplifies the poison."); 
             }
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("Attacks amplify poison."));
             }

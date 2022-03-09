@@ -3,45 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Creature is anything that acts and makes decisions in combat.
+/// </summary>
 public class Creature : MonoBehaviour
 {    
-    public string creature_name;
+    public string creatureName;
     public int speed;
-    public int max_speed;
-
-    public Controller targetingSystem;
-
-    public bool enemy;
-    public bool ai;
-
-
-    private void Start()
-    {
-        FindTargetingSystem();
-    }
-
-    /// <summary>
-    /// Need to find targetting system depending on controll mechanism.
-    /// </summary>
-    private void FindTargetingSystem()
-    {
-        if (ai)
-        {
-            targetingSystem = GameObject.Find("BattleManager").GetComponent<TrueAI>();
-        }
-        else
-        {
-            targetingSystem = GameObject.Find("BattleManager").GetComponent<TargetingSystem>();
-        }        
-    }
+    public int maxSpeed;
+    public Controller controller;
+    public bool isEnemy;
+    public bool isAI;
 
     /// <summary>
     /// In case creature changes its controls (eg. mind control spell), we need to refresh controller every time its about to act
     /// </summary>
     public void DecideYourMove()
     {
-        FindTargetingSystem();
-        targetingSystem.Activate(this);
+        GetComponentInChildren<RingHighlighter>().SetToActivityColor();
+        SetController();
+        controller.CreatureActs(this);
+    }
+
+    private void SetController()
+    {
+        if (isAI)
+        {
+            controller = GameObject.Find("BattleManager").GetComponent<AIController>();
+        }
+        else
+        {
+            controller = GameObject.Find("BattleManager").GetComponent<PlayerController>();
+        }
     }
 
     /// <summary>
@@ -49,12 +42,12 @@ public class Creature : MonoBehaviour
     /// </summary>
     /// <param name="ind">The Status efect we are asking for</param>
     /// <returns>Answer</returns>
-    public bool Is(Ind ind)
+    public bool Is(StatusParameter ind)
     {
-        var c = new Action(ID.Query);
-        c.Add(ind, 0);
-        c = ProcessAction(c);
-        if (c.prms[ind] == 0)
+        var query = new Query(QueryType.Question);
+        query.Add(ind, 0);
+        query = ProcessQuery(query);
+        if (query.parameters[ind] == 0)
         {
             return false;
         }
@@ -64,29 +57,24 @@ public class Creature : MonoBehaviour
         }
     }
 
-    public string GetName() 
-    {
-        return creature_name;
-    }
-
     public void ResetSpeed() 
     {
-        speed = max_speed;
+        speed = maxSpeed;
     }
 
     public void UpdateUI()
     {
-        GetComponentInChildren<CreatureStatus>().UpdateUI();
+        GetComponentInChildren<CreatureStatsDescriptionPanel>().UpdateUI();
     }
 
-    public void Activate() 
+    public void Highlight() 
     {        
-        GetComponentInChildren<Highlighter>().Activate();           
+        GetComponentInChildren<RingHighlighter>().SetToHighlightColor();           
     }
 
-    internal Action ProcessAction(Action action) 
+    internal Query ProcessQuery(Query action) 
     {
-        return GetComponent<ActionHandler>().ProcessAction(action);
+        return GetComponent<QueryHandler>().ProcessQuery(action);
     }
 
     public double GetHealth() 
@@ -103,15 +91,15 @@ public class Creature : MonoBehaviour
     }
     public double GetMaxHealth()
     {
-        Health h = GetComponentInChildren<Health>();
-        if (h != null) return h.maxHealth;
+        Health health = GetComponentInChildren<Health>();
+        if (health != null) return health.maxHealth;
         return 0;
     }
 
     public void FullHeal()
     {
-        Health h = GetComponentInChildren<Health>();
-        h.health = h.maxHealth;
+        Health health = GetComponentInChildren<Health>();
+        health.health = health.maxHealth;
     }
 
     public void Move(Vector3 other)

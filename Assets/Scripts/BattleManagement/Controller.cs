@@ -4,5 +4,5 @@ using UnityEngine;
 
 abstract public class Controller : MonoBehaviour
 {
-    public abstract void Activate(Creature creature);
+    public abstract void CreatureActs(Creature creature);
 }

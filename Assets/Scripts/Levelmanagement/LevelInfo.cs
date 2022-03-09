@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Holds game state that needs to be passed in between scenes.
+/// </summary>
 public class LevelInfo : MonoBehaviour
 {
     public int currLevel = 0;
@@ -11,7 +14,7 @@ public class LevelInfo : MonoBehaviour
     public int currUpgPoints = 0;
     public int upgPointsGain = 0;
     public bool campfire = false;
-    public Theatre theatre;
+    public StoryScreens theatre;
 
     // Start is called before the first frame update
     void Start()

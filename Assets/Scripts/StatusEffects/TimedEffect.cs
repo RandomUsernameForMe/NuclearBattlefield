@@ -5,6 +5,6 @@ using UnityEngine;
 public abstract class TimedEffect : StatusEffect
 {
     public int timer;
-    public abstract Action Tick();
+    public abstract Query Tick();
 
 }

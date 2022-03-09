@@ -6,18 +6,18 @@ using UnityEngine;
 public class Wand : StatusEffect
 {
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.AttackBuild)
+        if (action.type == QueryType.AttackBuild)
         {
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
 
             }
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
                 action.Add("Targets any creature on the battlefield.");
             }

@@ -15,30 +15,30 @@ public class ShieldBash : StatusEffect
         return returnValue;
     }
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.AttackBuild)
+        if (action.type == QueryType.AttackBuild)
         {
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
-                action.Add(Ind.Close, 1);
-                action.Add(Ind.Enemy, 1);
-                action.Add(Ind.PhysDmg, bashStrength);
-                action.Add(Ind.Stun,new StunBuilder(chance,stunDuration));
+                action.Add(StatusParameter.Close, 1);
+                action.Add(StatusParameter.Enemy, 1);
+                action.Add(StatusParameter.PhysDmg, bashStrength);
+                action.Add(StatusParameter.Stun,new StunBuilder(chance,stunDuration));
                 //action.Add(Ind.Push,new Push());
             }
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
                 action.Add("Bashes enemy with a shield. Has a chance to stun and pushes an enemy to the back.");
             }
-            if (action.prms.ContainsKey(Ind.SpecialName))
+            if (action.parameters.ContainsKey(StatusParameter.SpecialName))
             {
                 action.Add("Shield Bash");
             }
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("Bash: {0} dmg, {1} turn stun", bashStrength, stunDuration));
             }

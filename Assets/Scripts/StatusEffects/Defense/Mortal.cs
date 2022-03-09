@@ -6,7 +6,7 @@ using UnityEngine;
 public class Mortal : StatusEffect
 {
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
         return action;
     }

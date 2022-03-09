@@ -7,26 +7,26 @@ public class HealingWave : StatusEffect
 {
     public double strength;
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.AttackBuild)
+        if (action.type == QueryType.AttackBuild)
         {
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
-                action.Add(Ind.Healing, strength);
+                action.Add(StatusParameter.Healing, strength);
             }
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.SpecialName))
+            if (action.parameters.ContainsKey(StatusParameter.SpecialName))
             {
                 action.Add("Healing Touch");
             }
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
                 action.Add("Restores health.");
             }
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("Healing: {0} hp", strength));
             }

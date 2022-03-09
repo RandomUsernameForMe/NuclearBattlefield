@@ -8,26 +8,26 @@ public class PoisonBlast: StatusEffect
     public double potency;
     public int duration;
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.AttackBuild)
+        if (action.type == QueryType.AttackBuild)
         {
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
-                action.Add(Ind.Poison,new PoisonBuilder(potency, duration));
+                action.Add(StatusParameter.Poison,new PoisonBuilder(potency, duration));
             }
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.SpecialName))
+            if (action.parameters.ContainsKey(StatusParameter.SpecialName))
             {
                 action.Add("Poison Blast");
             }
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
                 action.Add("Blasts an enemy with a powerful toxin.");
             }
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("Poison: {0} dmg, {1} turn(s)", potency, duration));
             }
@@ -59,11 +59,11 @@ public class Poison : TimedEffect
         return null;
     }
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("Poisioned: {0} potancy, {1} duration", potency, timer));
             }
@@ -71,10 +71,10 @@ public class Poison : TimedEffect
         return action;
     }
 
-    public override Action Tick()
+    public override Query Tick()
     {
-        Action action = new Action(ID.Attack);
-        action.Add(Ind.TrueDmg, potency);
+        Query action = new Query(QueryType.Attack);
+        action.Add(StatusParameter.TrueDmg, potency);
         timer -= 1;
         return action;
     }
@@ -86,10 +86,10 @@ public class Poison : TimedEffect
     }
 }
 
-class PoisonBuilder : Builder
+class PoisonBuilder : StatusBuilder
 {
     public int duration;
-    public override void Build(GameObject obj)
+    public override void BuildStatusEffect(GameObject obj)
     {
         obj.AddComponent<Poison>().Set(value, duration);
     }

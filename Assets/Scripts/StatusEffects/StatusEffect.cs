@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum ID
+public enum QueryType
 {
     Attack,
     Description,
     AttackBuild,
     Render,
     Animation,
-    Query,
+    Question,
     Tick,
     Swap,
     None,
 }
 
-public enum Ind
+public enum StatusParameter
 {
     PhysDmg,
     MagicDmg,
@@ -29,9 +29,11 @@ public enum Ind
     Move,
     Claws,
     
-    // Query 
+    // Question 
     CanAct,
-    
+    Dead,
+    DestroyerUsed,
+
     // Description
     SpecialName,
     Basic,
@@ -44,13 +46,11 @@ public enum Ind
     Far,
     Enemy,
     Ally,
-    Dead,
-    DestroyerUsed,
 }
 
 public abstract class StatusEffect : MonoBehaviour
 {
     abstract public List<(Type,Type)> GetRequirements();   
 
-    abstract public Action ProcessEvent(Action action);
+    abstract public Query ProcessQuery(Query query);
 }

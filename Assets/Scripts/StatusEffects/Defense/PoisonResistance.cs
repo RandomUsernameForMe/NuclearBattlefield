@@ -10,27 +10,27 @@ public class PoisonResistance : StatusEffect
     */
     public double resistance;
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.Attack)
+        if (action.type == QueryType.Attack)
         {
-            if (action.effects.ContainsKey(Ind.Poison))
+            if (action.effects.ContainsKey(StatusParameter.Poison))
             {
-                action.effects[Ind.Poison].value = Math.Floor(action.effects[Ind.Poison].value * (1-resistance));
+                action.effects[StatusParameter.Poison].value = Math.Floor(action.effects[StatusParameter.Poison].value * (1-resistance));
             }
-            if (action.prms.ContainsKey(Ind.PoisonAmp))
+            if (action.parameters.ContainsKey(StatusParameter.PoisonAmp))
             {                
                 Poison poison = GetComponent<Poison>();
                 if (poison != null)
                 {
-                  poison.potency += action.prms[Ind.PoisonAmp];
-                  poison.timer += (int)action.prms[Ind.PoisonAmp];
+                  poison.potency += action.parameters[StatusParameter.PoisonAmp];
+                  poison.timer += (int)action.parameters[StatusParameter.PoisonAmp];
                 }                
             }
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("Poison resist: {0} %", resistance*100));
             }

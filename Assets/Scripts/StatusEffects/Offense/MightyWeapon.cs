@@ -7,27 +7,27 @@ public class MightyWeapon : StatusEffect
 {
     public double gigaStrength;
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.AttackBuild)
+        if (action.type == QueryType.AttackBuild)
         {
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
-                action.Add(Ind.Close, 1);
-                action.Add(Ind.PhysDmg, gigaStrength);
+                action.Add(StatusParameter.Close, 1);
+                action.Add(StatusParameter.PhysDmg, gigaStrength);
             }            
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
                 action.Add("Smash enemy with massive strike.");
             }
-            if (action.prms.ContainsKey(Ind.SpecialName))
+            if (action.parameters.ContainsKey(StatusParameter.SpecialName))
             {
                 action.Add("PowerStrike");
             }
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("PowerStrike: {0} dmg", gigaStrength));
             }

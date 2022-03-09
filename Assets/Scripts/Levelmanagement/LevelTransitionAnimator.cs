@@ -6,20 +6,19 @@ public class LevelTransitionAnimator : MonoBehaviour
 {
     Animator anim;
     
-    // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        LevelManager.OnBattleLoaded += LoadAnimation;
-        LevelManager.OnCampfireLoaded += LoadAnimation;
+        LevelManager.OnBattleLoaded += PlayLoadingAnimation;
+        LevelManager.OnCampfireLoaded += PlayLoadingAnimation;
     }
 
-    void LoadAnimation()
+    void PlayLoadingAnimation()
     {
         anim.SetTrigger("LevelLoad");
     }
 
-    public void EndLevelAnimation()
+    public void PlayEndLevelAnimation()
     {
         anim.SetTrigger("LevelEnd");
     } 

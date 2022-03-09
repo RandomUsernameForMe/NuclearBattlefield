@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Topological wizard is present in every scene and calculates a topological order of StatusEffect elements
+/// according to their requirements.
+/// </summary>
 public class TopologicalWizard : MonoBehaviour
 {
     private List<StatusEffect> list;
@@ -16,13 +20,13 @@ public class TopologicalWizard : MonoBehaviour
         {
             adj.Add(item.GetType(),new List<Type>());
         }
-        CalculateGraph();
+        CalculateTopologicalOrder();
     }
 
     /// <summary>
-    /// Given a list of all possible modules and their requirements for ordering, calculate a possible topological order for them. This algorithm is copied from the web.
+    /// Given a list of all possible StatusEffects and their requirements for ordering, calculate a possible topological order for them.
     /// </summary>
-    private void CalculateGraph()
+    private void CalculateTopologicalOrder()
     {
         foreach (var eff in list)
         {
@@ -41,35 +45,6 @@ public class TopologicalWizard : MonoBehaviour
         }
         answers = TopologicalSort();
     }
-
-
-    /// <summary>
-    /// Stackoverflow programming
-    /// A recursive function used by topologicalSort.
-    /// </summary>
-    /// <param name="v">Current graph vertex</param>
-    /// <param name="visited">All visited vertices </param>
-    /// <param name="stack">All the remaining vertices to sort</param>
-    void TopologicalSortUtil(Type v, Dictionary<Type,bool> visited,
-                             List<Type> stack)
-    {
-
-        // Mark the current node as visited.
-        visited[v] = true;
-
-        // Recur for all the vertices
-        // adjacent to this vertex
-        foreach (var vertex in adj[v])
-        {
-            if (!visited[vertex])
-                TopologicalSortUtil(vertex, visited, stack);
-        }
-
-        // Push current vertex to
-        // stack which stores result
-        stack.Add(v);
-    }
-
 
     /// <summary>
     /// The function to do Topological Sort.
@@ -98,6 +73,31 @@ public class TopologicalWizard : MonoBehaviour
         stack.Reverse();
 
         return stack;
+    }
+
+    /// <summary>
+    /// A recursive function used by TopologicalSort.
+    /// </summary>
+    /// <param name="v">Current graph vertex</param>
+    /// <param name="visited">All visited vertices </param>
+    /// <param name="stack">All the remaining vertices to sort</param>
+    void TopologicalSortUtil(Type v, Dictionary<Type,bool> visited,List<Type> stack)
+    {
+
+        // Mark the current node as visited.
+        visited[v] = true;
+
+        // Recur for all the vertices
+        // adjacent to this vertex
+        foreach (var vertex in adj[v])
+        {
+            if (!visited[vertex])
+                TopologicalSortUtil(vertex, visited, stack);
+        }
+
+        // Push current vertex to
+        // stack which stores result
+        stack.Add(v);
     }
 
     public int Compare(Type a, Type b)

@@ -16,13 +16,17 @@ public struct Position
     public override string ToString() => $"({X}, {Y})";
 }
 
+/// <summary>
+/// Main manager of the battle and moves within. 
+/// Controls the order of actions and assigns turns to creatures.
+/// </summary>
 public class Battlemanager : MonoBehaviour
 {
 
     public Party party;
     public Party enemyParty;    
     public Creature currentCreature;
-    private UIManager ui;
+    private UIManager UI;
     private float lastMove;
     private bool busy = false;
     public bool loaded = false;
@@ -30,31 +34,25 @@ public class Battlemanager : MonoBehaviour
     private void Start()
     {
         Load();
-    }
-    
-    /// <summary>
-    /// There is a minimum time required between two creatures playing
-    /// </summary>
+    }   
+
     void Update()
     {
+        // Minimum time is required between two creatures playing
         if (Time.time - lastMove > 1 && !busy)
         {
             busy = true;
-            currentCreature.GetComponentInChildren<Highlighter>().SetToPlayingColor();
             currentCreature.DecideYourMove();
         }
     }
 
-    /// <summary>
-    /// Initiation at the start of a battle
-    /// </summary>
     private void Load()
     {
         party = GameObject.Find("AllyParty").GetComponent<Party>();
         enemyParty = GameObject.Find("EnemyParty").GetComponent<Party>();
-        SetNextCreature();
-        ui = GetComponent<UIManager>();
-        ui.RefreshUI();
+        NextCreaturesTurn();
+        UI = GetComponent<UIManager>();
+        UI.RefreshUI();
         lastMove = Time.time;
     }
 
@@ -62,54 +60,55 @@ public class Battlemanager : MonoBehaviour
     /// <summary>
     /// Skips a turn of a character
     /// </summary>
-    public void Skip(){
-        ui.RefreshUI();
+    public void CurrentCreaturSkips(){
+        UI.RefreshUI();
         lastMove = Time.time;
         busy = false;
         party.ResetColors();
         enemyParty.ResetColors();
-        SetNextCreature();
+        NextCreaturesTurn();
     }
 
     /// <summary>
     /// Current creature performs a selected action towards target creature
     /// </summary>
     /// <param name="target">Picked target, ally or enemy</param>
-    /// <param name="action">Picked or chosen action to perform</param>
-    public void Play(Creature target, Action action)
+    /// <param name="query">Picked or chosen action to perform</param>
+    public void CurrentCreaturePlays(Creature target, Query query)
     {
         ResetColors();
+        GetComponent<UIManager>().HideCancelButton();
 
-        if (action.id == ID.Swap)
+        if (query.type == QueryType.Swap)
         {
             Vector3 buffer = currentCreature.transform.position;
             currentCreature.Move(target.transform.position);
             target.Move(buffer);
         }
 
-        if (action.id == ID.AttackBuild || action.id == ID.Attack)
+        if (query.type == QueryType.Attack)
         {
-            // ID of action is currently "AttackBuilder", next think i want are attack animations 
-            action.id = ID.Animation;
-            currentCreature.GetComponent<ActionHandler>().ProcessAction(action);
+            // I want to play possible animations first because processing query through creatures might modify it
+            query.type = QueryType.Animation;
+            currentCreature.GetComponent<QueryHandler>().ProcessQuery(query);
 
             // And now i want the actually attack to proceed
-            action.id = ID.Attack;
-            target.GetComponent<ActionHandler>().ProcessAction(action);
+            query.type = QueryType.Attack;
+            target.GetComponent<QueryHandler>().ProcessQuery(query);
 
         }
 
         target.UpdateUI();
-        ui.RefreshUI();
+        UI.RefreshUI();
         lastMove = Time.time;
         busy = false;
-        SetNextCreature();        
+        NextCreaturesTurn();        
     }
 
     /// <summary>
     /// Make a new creature take turn
     /// </summary>
-    void SetNextCreature() {
+    void NextCreaturesTurn() {
 
         int max_speed = 0;
         Creature nextCreature = null;
@@ -117,7 +116,6 @@ public class Battlemanager : MonoBehaviour
 
         var playerCharacters = party.GetParty();
         var enemyCharacters = enemyParty.GetParty();
-
 
         // Search for a character with highest speed that havent moved this turn
         while (!found)
@@ -142,23 +140,21 @@ public class Battlemanager : MonoBehaviour
                 }
             }
             
-            // If no creature is found, refresh all speeds
             if (nextCreature == null) {
-                NewTurn();              
+                TriggerNewTurn();              
             }
             else found = true;
         }
         
         nextCreature.GetComponent<Creature>().speed = 0;
+        Query action = new Query(QueryType.Question);
+        action.Add(StatusParameter.CanAct, 1);
+        nextCreature.GetComponent<QueryHandler>().ProcessQuery(action);
 
-        // Check if next creature in line can play (is stunned or dead?)
-        Action action = new Action(ID.Query);
-        action.Add(Ind.CanAct, 1);
-        nextCreature.GetComponent<ActionHandler>().ProcessAction(action);
-
-        if (action.prms[Ind.CanAct] == 0)
+        // if chosen creature is unable to act, choose a next one
+        if (action.parameters[StatusParameter.CanAct] == 0)
         {
-            SetNextCreature();
+            NextCreaturesTurn();
         }
         else
         {
@@ -169,11 +165,11 @@ public class Battlemanager : MonoBehaviour
     /// <summary>
     /// After all creatures have played, their speeds are refreshed and all timed status effects (like poison) trigger
     /// </summary>
-    void NewTurn() {
+    void TriggerNewTurn() {
         party.Tick();
         enemyParty.Tick();
         ResetSpeed();
-        ui.RefreshUI();
+        UI.RefreshUI();
     }
 
     void ResetSpeed() {

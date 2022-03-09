@@ -16,17 +16,17 @@ public class Stun : TimedEffect
         return returnValue;
     }
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.Query)
+        if (action.type == QueryType.Question)
         {
-            if (action.prms.ContainsKey(Ind.CanAct)) {
-                action.prms[Ind.CanAct] = 0;
+            if (action.parameters.ContainsKey(StatusParameter.CanAct)) {
+                action.parameters[StatusParameter.CanAct] = 0;
             }
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("Stunned: {0} turn(s)", timer));
             }
@@ -39,17 +39,17 @@ public class Stun : TimedEffect
         this.timer = duration;
     }
 
-    public override Action Tick()
+    public override Query Tick()
     {
         timer -= 1;
-        return new Action(ID.None);
+        return new Query(QueryType.None);
     }
 }
 
-class StunBuilder : Builder
+class StunBuilder : StatusBuilder
 {
     public int duration;
-    public override void Build(GameObject obj)
+    public override void BuildStatusEffect(GameObject obj)
     {
         // TODO náhodu 
         obj.AddComponent<Stun>().Set(duration);

@@ -13,27 +13,27 @@ public class Claws : StatusEffect
         return returnValue;
     }
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.AttackBuild)
+        if (action.type == QueryType.AttackBuild)
         {
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {                
-                action.Add(Ind.Enemy, 1);
-                action.Add(Ind.Claws, new ClawedBuilder(strength));
+                action.Add(StatusParameter.Enemy, 1);
+                action.Add(StatusParameter.Claws, new ClawedBuilder(strength));
             }
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
                 action.Add("Cuts into damaged flesh. Does more damage to already clawed enemies.");
             }
-            if (action.prms.ContainsKey(Ind.SpecialName))
+            if (action.parameters.ContainsKey(StatusParameter.SpecialName))
             {
                 action.Add("Claw attack");
             }
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("Claws: {0} dmg, 2x to clawed enemies", strength));
             }
@@ -52,23 +52,23 @@ public class Clawed : TimedEffect
         return returnValue;
     }
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.Attack)
+        if (action.type == QueryType.Attack)
         {
-            if (action.prms.ContainsKey(Ind.Claws))
+            if (action.parameters.ContainsKey(StatusParameter.Claws))
             {
-                action.prms[Ind.PhysDmg] += intensity;
+                action.parameters[StatusParameter.PhysDmg] += intensity;
                 intensity += 1; 
             }
         }
         return action;
     }
 
-    public override Action Tick()
+    public override Query Tick()
     {
         timer = timer - 1;
-        return new Action(ID.None);
+        return new Query(QueryType.None);
     }
 
     internal void Set(int strength)
@@ -77,10 +77,10 @@ public class Clawed : TimedEffect
     }
 }
 
-public class ClawedBuilder : Builder
+public class ClawedBuilder : StatusBuilder
 {
     int strength;
-    public override void Build(GameObject obj)
+    public override void BuildStatusEffect(GameObject obj)
     {
         obj.AddComponent<Clawed>().Set(strength);
     }

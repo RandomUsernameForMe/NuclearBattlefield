@@ -14,22 +14,22 @@ public class PhysicalWeapon : StatusEffect
         return returnValue;
     }
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.AttackBuild)
+        if (action.type == QueryType.AttackBuild)
         {
-            if (action.prms.ContainsKey(Ind.Basic))
+            if (action.parameters.ContainsKey(StatusParameter.Basic))
             {
-                action.Add(Ind.PhysDmg, atkDmg);
+                action.Add(StatusParameter.PhysDmg, atkDmg);
             }
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.Basic))
+            if (action.parameters.ContainsKey(StatusParameter.Basic))
             {
                 action.Add("A physical attack.");
             }
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("Attack: {0} dmg", atkDmg));
             }

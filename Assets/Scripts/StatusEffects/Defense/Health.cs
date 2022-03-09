@@ -19,42 +19,42 @@ public class Health : StatusEffect
     }
 
 
-    override public Action ProcessEvent(Action action)
+    override public Query ProcessQuery(Query action)
     {
-        if (action.id == ID.Attack)
+        if (action.type == QueryType.Attack)
         {
-            if (action.prms.ContainsKey(Ind.PhysDmg))
+            if (action.parameters.ContainsKey(StatusParameter.PhysDmg))
             {
-                health -= action.prms[Ind.PhysDmg];
+                health -= action.parameters[StatusParameter.PhysDmg];
             }
-            if (action.prms.ContainsKey(Ind.PercentDmg))
+            if (action.parameters.ContainsKey(StatusParameter.PercentDmg))
             {
-                health = action.prms[Ind.PercentDmg] * health;
+                health = action.parameters[StatusParameter.PercentDmg] * health;
             }
-            if (action.prms.ContainsKey(Ind.TrueDmg))
+            if (action.parameters.ContainsKey(StatusParameter.TrueDmg))
             {
-                health -= action.prms[Ind.TrueDmg];
+                health -= action.parameters[StatusParameter.TrueDmg];
             }
-            if (action.prms.ContainsKey(Ind.Healing))
+            if (action.parameters.ContainsKey(StatusParameter.Healing))
             {
-                health = Math.Min(health + action.prms[Ind.Healing], maxHealth);
+                health = Math.Min(health + action.parameters[StatusParameter.Healing], maxHealth);
             }
         }
         
-        if (action.id == ID.Query)
+        if (action.type == QueryType.Question)
         {
-            if (action.prms.ContainsKey(Ind.CanAct) && health <= 0)
+            if (action.parameters.ContainsKey(StatusParameter.CanAct) && health <= 0)
             {
-                action.prms[Ind.CanAct] = 0;
+                action.parameters[StatusParameter.CanAct] = 0;
             }
-            if (action.prms.ContainsKey(Ind.Dead) && health <= 0)
+            if (action.parameters.ContainsKey(StatusParameter.Dead) && health <= 0)
             {
-                action.prms[Ind.Dead] = 1;
+                action.parameters[StatusParameter.Dead] = 1;
             }
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("Health: {0}", health));
             }

@@ -6,18 +6,18 @@ using UnityEngine;
 public class Armored : StatusEffect
 {
     public int armor;
-    override public Action ProcessEvent(Action action)
+    override public Query ProcessQuery(Query action)
     {
-        if (action.id == ID.Attack)
+        if (action.type == QueryType.Attack)
         {
-            if (action.prms.ContainsKey(Ind.PhysDmg))
+            if (action.parameters.ContainsKey(StatusParameter.PhysDmg))
             {                
-                action.prms[Ind.PhysDmg] -= armor;
+                action.parameters[StatusParameter.PhysDmg] -= armor;
             } 
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {            
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("Armor: {0}", armor));
             }

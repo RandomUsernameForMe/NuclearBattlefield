@@ -10,29 +10,29 @@ public class Destroyer : StatusEffect
         return null;
     }
 
-    public override Action ProcessEvent(Action action)
+    public override Query ProcessQuery(Query action)
     {
-        if (action.id == ID.AttackBuild)
+        if (action.type == QueryType.AttackBuild)
         {
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
-                action.Add(Ind.Enemy, 1);
-                action.Add(Ind.PhysDmg, 200);
-                action.Add(Ind.DestroyerUsed, 1);
+                action.Add(StatusParameter.Enemy, 1);
+                action.Add(StatusParameter.PhysDmg, 200);
+                action.Add(StatusParameter.DestroyerUsed, 1);
                 GameObject.Find("Main Camera").GetComponent<Animation>().Play(); 
             }
         }
-        if (action.id == ID.Description)
+        if (action.type == QueryType.Description)
         {
-            if (action.prms.ContainsKey(Ind.Special))
+            if (action.parameters.ContainsKey(StatusParameter.Special))
             {
                 action.Add("Devastate an enemy.");
             }
-            if (action.prms.ContainsKey(Ind.SpecialName))
+            if (action.parameters.ContainsKey(StatusParameter.SpecialName))
             {
                 action.Add("Destroyer");
             }
-            if (action.prms.ContainsKey(Ind.Tooltip))
+            if (action.parameters.ContainsKey(StatusParameter.Tooltip))
             {
                 action.Add(String.Format("DESTROYER EQUIPPED"));
             }

@@ -2,28 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Action
+public class Query
 {
-    public ID id;
-    public Dictionary<Ind,double> prms;
+    public QueryType type;
+    public Dictionary<StatusParameter,double> parameters;
     public List<string> descs = new List<string>();
-    public Dictionary<Ind,Builder> effects = new Dictionary<Ind, Builder>();
+    public Dictionary<StatusParameter,StatusBuilder> effects = new Dictionary<StatusParameter, StatusBuilder>();
 
-    public Action(ID ID)
+    public Query(QueryType type)
     {
-        this.id = ID;
-        prms = new Dictionary<Ind, double>();
+        this.type = type;
+        parameters = new Dictionary<StatusParameter, double>();
     }
 
-    public void Add(Ind str, double val)
+    public void Add(StatusParameter str, double val)
     {
-        if (prms.ContainsKey(str) )
+        if (parameters.ContainsKey(str) )
         {
-            prms[str] += val;
+            parameters[str] += val;
         }
         else
         {
-            prms.Add(str, val);
+            parameters.Add(str, val);
         }        
     }
 
@@ -35,7 +35,7 @@ public class Action
         }
     }
 
-    public void Add(Ind ind,Builder eff)
+    public void Add(StatusParameter ind,StatusBuilder eff)
     {
         if (!effects.ContainsKey(ind))
         {
