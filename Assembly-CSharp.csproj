@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\LevelManagement\FightTransitions.cs" />
     <Compile Include="Assets\Scripts\StatusEffects\Defense\GettingHitAnimatorStatusEffect.cs" />
     <Compile Include="Assets\Scripts\StatusEffects\Offense\ShieldBash.cs" />
+    <Compile Include="Assets\Scripts\BattleManagement\TargetingSystem.cs" />
     <Compile Include="Assets\Scripts\StatusEffects\Offense\ShortWeapon.cs" />
     <Compile Include="Assets\Scripts\Upgrades\UpgradeBuilder.cs" />
     <Compile Include="Assets\Scripts\StatusEffects\Defense\PoisonResistance.cs" />
@@ -154,7 +155,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\Upgrades\PowerStrikeUpgrade.cs" />
-    <Compile Include="Assets\Scripts\BattleManagement\TargetingSystem.cs" />
+    <Compile Include="Assets\SimulationRunner.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
