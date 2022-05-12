@@ -13,8 +13,8 @@ public class LevelInfo : MonoBehaviour
     public int maxUpgPointsGain = 10;
     public int currUpgPoints = 0;
     public int upgPointsGain = 0;
-    public bool campfire = false;
-    public StoryScreens theatre;
+    public bool isAtCampfire = false;
+    public StoryScreens storyScreens;
 
     // Start is called before the first frame update
     void Start()

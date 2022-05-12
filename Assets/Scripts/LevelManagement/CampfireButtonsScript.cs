@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CampfireDecisionButtonsScript : MonoBehaviour
+public class CampfireButtonsScript : MonoBehaviour
 {
     public GameObject descriptionRepeatLevelButton;
     public GameObject descriptionNextLevelButton;
@@ -16,35 +16,35 @@ public class CampfireDecisionButtonsScript : MonoBehaviour
         descriptionNextLevelButton.SetActive(false);
     }
 
-    public void RepeatOnExit()
+    public void OnExitRepeatLevelButton()
     {
         descriptionRepeatLevelButton.SetActive(false);
     }
 
-    public void RepeatOnEnter()
+    public void OnEnterRepeatLevelButton()
     {
         descriptionRepeatLevelButton.SetActive(true);
     }
 
-    public void RepeatOnPress()
+    public void OnPressRepeatLevelButton()
     {
         var manager = GameObject.Find("LevelInfo").GetComponent<LevelManager>();
         manager.RepeatLevel();
     }
 
-    public void NextOnExit()
+    public void OnExitNextLevelButton()
     {
         descriptionNextLevelButton.SetActive(false);
     }
 
-    public void NextOnEnter()
+    public void OnEnterNextLevelButton()
     {
         descriptionNextLevelButton.SetActive(true);
     }
 
-    public void NextOnPress()
+    public void OnPressNextLevelButton()
     {
         var manager = GameObject.Find("LevelInfo").GetComponent<LevelManager>();
-        manager.NextLevel();
+        manager.LoadNextLevel();
     }
 }

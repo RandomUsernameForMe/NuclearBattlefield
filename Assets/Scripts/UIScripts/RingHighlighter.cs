@@ -15,12 +15,10 @@ public class RingHighlighter : MonoBehaviour
     public Color playing;
     public float emissionIntensity;
     public Renderer render;
-
     void Start()
     {        
         canvas.SetActive(false);
     }
-
 
     public void Reset() {
         ColorAura colorAura = GetComponentInChildren<ColorAura>();
