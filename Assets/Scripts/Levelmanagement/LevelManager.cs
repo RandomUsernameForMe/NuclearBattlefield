@@ -19,11 +19,11 @@ public class LevelManager : MonoBehaviour
     private int MAXLEVEL = 3;
 
     // two delegates that are called at start of appropriate loaded level
-    public delegate void BattleSceneLoaded();
-    public static event BattleSceneLoaded OnBattleLoaded;
+    public delegate void OnBattleSceneLoadedEvent();
+    public static event OnBattleSceneLoadedEvent OnBattleSceneLoaded;
 
-    public delegate void CampfireLoaded();
-    public static event CampfireLoaded OnCampfireLoaded;
+    public delegate void OnCampfireLoadedEvent();
+    public static event OnCampfireLoadedEvent OnCampfireSceneLoaded;
    
 
     /// <summary>
@@ -77,11 +77,15 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);        
         SceneManager.LoadScene(levelNum);
-        if (!info.campfire) {
-            OnBattleLoaded();
-        }
-        else {
-            OnCampfireLoaded();
-        }
+    }
+
+    internal static void TriggerBattleLoaded()
+    {
+        OnBattleSceneLoaded();
+    }
+
+    internal static void CampfireTrigger()
+    {
+        OnCampfireSceneLoaded();
     }
 }

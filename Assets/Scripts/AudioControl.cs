@@ -23,7 +23,7 @@ public class AudioControl : MonoBehaviour
         if (currentTime < duration)
         {
             currentTime += Time.deltaTime;
-            aud.volume = Mathf.Lerp(0, 0.3f, currentTime / duration);
+            aud.volume = Mathf.Lerp(0, 0.05f, currentTime / duration);
         }
 
         if (fade)

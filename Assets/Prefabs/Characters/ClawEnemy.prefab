@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1749267990157725
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9188343535087568424}
-  m_Layer: 0
-  m_Name: Missing Prefab (Dummy)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9188343535087568424
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1749267990157725}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4545120945744251258}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &196265297375021901
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,7 +13,7 @@ GameObject:
   - component: {fileID: 6336607827961299689}
   - component: {fileID: 1151402154572716307}
   m_Layer: 0
-  m_Name: KnightsSword (Missing Prefab)
+  m_Name: Claws
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,8 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 9188343535087568424}
+  m_Children: []
   m_Father: {fileID: 887144936453057129}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -76,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e419a1a99e218d4e902e5d1bf61d3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkDmg: 10
+  value: 10
 --- !u!114 &6336607827961299689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f02dde7e45c01c44ba8e1399af59f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gigaStrength: 15
+  gigaStrength: 25
 --- !u!114 &1151402154572716307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,12 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ed65e03fe52214e82be9526af33e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creature_name: Claw Beast
+  creatureName: Clawer
   speed: 1
-  max_speed: 1
-  targetingSystem: {fileID: 0}
-  enemy: 0
-  ai: 1
+  maxSpeed: 1
+  controller: {fileID: 0}
+  isEnemy: 1
+  isAI: 1
 --- !u!1001 &6026056500760543744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -199,7 +168,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Humanoid_components
       objectReference: {fileID: 0}
+    - target: {fileID: 1913066452579816968, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 887144936453057130}
     - target: {fileID: 6293673506591636663, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 887144936453057130}
+    - target: {fileID: 7253368446708598256, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 887144936453057130}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoisonUpgrade : UpgradeBuilder
+public class PoisonUpgrade : GenericUpgrade
 {
     private int v;
 
@@ -16,7 +16,7 @@ public class PoisonUpgrade : UpgradeBuilder
 
     public override void Upgrade(Creature creature)
     {
-        creature.GetComponentInChildren<PoisonBlast>().potency += v;
+        creature.GetComponentInChildren<PoisonBlast>().value += v;
         creature.GetComponentInChildren<PoisonBlast>().duration += v;
         creature.GetComponentInChildren<PoisonAmplifier>().power += v;
         UpgradesManager.PayPoints(cost);

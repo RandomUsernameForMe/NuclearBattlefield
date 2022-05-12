@@ -8,41 +8,55 @@ public class TargetingSystem
     /// Returns available target positions for an ability. 
     /// </summary>
     /// <param name="pos">Grid coordinates plus a bool if ally or enemy side</param>
-    /// <param name="is_enemy">If the one asking is enemy or frieds</param>
+    /// <param name="casterIsEnemy">If the one asking is enemy or frieds</param>
     /// <returns></returns>
-    public static List<(int, int, bool)> PickViableTargets(List<StatusParameter> pos, bool is_enemy)
+    public static List<int> PickViableTargets(List<QueryParameter> pos, bool casterIsEnemy)
     {
-        List<(int, int, bool)> list = new List<(int, int, bool)> { (0, 0, false), (1, 0, false), (0, 1, false), (1, 1, false), (0, 0, true), (1, 0, true), (0, 1, true), (1, 1, true) };
+        List<int> list = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7 };
         foreach (var item in pos)
         {
             switch (item)
             {
-                case StatusParameter.Close:
-                    list.Remove((0, 0, false));
-                    list.Remove((0, 1, false));
-                    list.Remove((1, 0, true));
-                    list.Remove((1, 1, true));
+                case QueryParameter.Close:
+                    list.Remove(0);
+                    list.Remove(2);
+                    list.Remove(5);
+                    list.Remove(7);
                     break;
-                case StatusParameter.Far:
-                    list.Remove((1, 0, false));
-                    list.Remove((1, 1, false));
-                    list.Remove((0, 0, true));
-                    list.Remove((0, 1, true));
+                case QueryParameter.Far:
+                    list.Remove(0);
+                    list.Remove(2);
+                    list.Remove(5);
+                    list.Remove(7);
                     break;
-                case StatusParameter.Ally:
-                    list.Remove((0, 0, !is_enemy));
-                    list.Remove((0, 1, !is_enemy));
-                    list.Remove((1, 0, !is_enemy));
-                    list.Remove((1, 1, !is_enemy));
+                case QueryParameter.Ally:
+                    var x = 4;
+                    if (casterIsEnemy) x = 0;
+                    list.Remove(x);
+                    list.Remove(x+1);
+                    list.Remove(x+2);
+                    list.Remove(x+3);
                     break;
-                case StatusParameter.Enemy:
-                    list.Remove((0, 0, is_enemy));
-                    list.Remove((0, 1, is_enemy));
-                    list.Remove((1, 0, is_enemy));
-                    list.Remove((1, 1, is_enemy));
+                case QueryParameter.Enemy:
+                    var y = 0;
+                    if (casterIsEnemy) y = 4;
+                    list.Remove(y);
+                    list.Remove(y + 1);
+                    list.Remove(y + 2);
+                    list.Remove(y + 3);
                     break;
             }
         }
         return list;
+    }
+
+    public static Creature GetCreatureByPosition(int pos, BattleManager manager)
+    {
+        var party = manager.allyParty;
+        if (pos >= 4) {
+            party = manager.enemyParty;
+            pos = pos - 4;
+        }
+        return party.GetParty()[pos].GetComponentInChildren<Creature>();
     }
 }

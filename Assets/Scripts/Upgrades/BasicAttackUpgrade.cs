@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicAttackUpgrade : UpgradeBuilder
+public class BasicAttackUpgrade : GenericUpgrade
 {
     private int v;
 
@@ -16,7 +16,7 @@ public class BasicAttackUpgrade : UpgradeBuilder
 
     public override void Upgrade(Creature creature)
     {
-        creature.GetComponentInChildren<PhysicalWeapon>().atkDmg += v;
+        creature.GetComponentInChildren<PhysicalWeapon>().value += v;
         UpgradesManager.PayPoints(cost);
     }
 }

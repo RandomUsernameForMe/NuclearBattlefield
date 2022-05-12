@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CampfireFullHeal : UpgradeBuilder
+public class CampfireFullHeal : GenericUpgrade
 {
     private int v;
 

@@ -18,9 +18,14 @@ public class UpgradesManager : MonoBehaviour
     public int upgPoints;
     public TextMeshProUGUI points;
 
-    public void Start()
-    {        
-        Load();
+    private void OnEnable()
+    {
+        LevelManager.OnCampfireSceneLoaded += Load;
+    }
+
+    private void OnDisable()
+    {
+        LevelManager.OnCampfireSceneLoaded -= Load;
     }
 
     /// <summary>
@@ -46,8 +51,8 @@ public class UpgradesManager : MonoBehaviour
     /// <param name="offsetX">Coordinates for where to generate buttons</param>
     private void GenerateOptions(GameObject item, float offsetX)
     {        
-        var effects = item.gameObject.GetComponentsInChildren<StatusEffect>();
-        var upgradeBuilders = new List<UpgradeBuilder>();
+        var effects = item.gameObject.GetComponentsInChildren<Component>();
+        var upgradeBuilders = new List<GenericUpgrade>();
         
         // hard coded upgrade possibilities
         if (Contains(effects,typeof(ShieldBash))) 
@@ -73,14 +78,14 @@ public class UpgradesManager : MonoBehaviour
 
         // Here I need to find out whether creature is Dead
         var query = new Query(QueryType.Question);
-        query.Add(StatusParameter.Dead,0);
+        query.Add(QueryParameter.Dead,0);
         query = item.GetComponentInChildren<Creature>().ProcessQuery(query);
 
-        if (Contains(effects, typeof(Health)) && query.parameters[StatusParameter.Dead] == 0)
+        if (Contains(effects, typeof(Health)) && query.parameters[QueryParameter.Dead] == 0)
         {
             upgradeBuilders.Add(new CampfireFullHeal());
         }
-        if (Contains(effects, typeof(Health)) && query.parameters[StatusParameter.Dead] == 1)
+        if (Contains(effects, typeof(Health)) && query.parameters[QueryParameter.Dead] == 1)
         {
             upgradeBuilders.Add(new CampfireRevive());
         }
@@ -102,7 +107,7 @@ public class UpgradesManager : MonoBehaviour
         }
     }
 
-    public static bool Contains(StatusEffect[] list, Type type)
+    public static bool Contains(Component[] list, Type type)
     {
         bool rv = false;
         for (int i = 0; i < list.Length; i++)
@@ -129,7 +134,8 @@ public class UpgradesManager : MonoBehaviour
 
     private void GetPoints()
     {
-        upgPoints = GameObject.Find("LevelInfo").GetComponent<LevelInfo>().currUpgPoints;
+        var obj = GameObject.Find("LevelInfo");
+        if (obj != null) upgPoints = obj.GetComponent<LevelInfo>().currUpgPoints;
     }
 
     public static void PayPoints(int cost)

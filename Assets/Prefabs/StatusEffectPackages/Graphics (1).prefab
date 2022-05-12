@@ -494,7 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1305055831946268725}
-  def: {r: 0.5395185, g: 0.6509434, b: 0.15045391, a: 1}
+  _default: {r: 1, g: 0.9614235, b: 0, a: 0}
   highlight: {r: 1, g: 0, b: 0, a: 1}
   hover: {r: 0, g: 0, b: 1, a: 1}
   playing: {r: 0, g: 1, b: 0, a: 1}

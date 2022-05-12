@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e419a1a99e218d4e902e5d1bf61d3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkDmg: 25
+  value: 20
 --- !u!114 &7430019721183726057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,11 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ed65e03fe52214e82be9526af33e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creature_name: Moon
+  creatureName: Moon
   speed: 2
-  max_speed: 2
-  targetingSystem: {fileID: 0}
-  enemy: 0
+  maxSpeed: 2
+  controller: {fileID: 0}
+  isEnemy: 0
+  isAI: 0
 --- !u!1001 &2898763516334789170
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -167,6 +168,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Humanoid_components
       objectReference: {fileID: 0}
+    - target: {fileID: 1913066452579816968, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 7684186332602213574}
+    - target: {fileID: 7253368446708598256, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 7684186332602213574}
     - target: {fileID: 8228595137118770235, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
       propertyPath: m_RootOrder
       value: 0

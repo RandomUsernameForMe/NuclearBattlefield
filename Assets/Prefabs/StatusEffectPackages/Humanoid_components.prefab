@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3047627406571559239}
   - component: {fileID: 7253368446708598256}
   - component: {fileID: 1913066452579816968}
-  - component: {fileID: 7052970663890660607}
   m_Layer: 0
   m_Name: Humanoid_components
   m_TagString: Untagged
@@ -47,9 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6e44adc6e6a594789e93d54faea6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 50
   health: 50
-  maxHealth: 50
-  animator: {fileID: 0}
 --- !u!114 &3047627406571559239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08abe62512d71e04483d350c44302e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armor: 6
+  value: 5
 --- !u!114 &7253368446708598256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,16 +87,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
---- !u!114 &7052970663890660607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705382051212823081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d866f31865895934aa0300c0cc0be987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resistance: 0

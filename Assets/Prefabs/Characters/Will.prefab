@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e419a1a99e218d4e902e5d1bf61d3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkDmg: 25
+  value: 15
 --- !u!1 &1895070188640540207
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,11 +153,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ed65e03fe52214e82be9526af33e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creature_name: Will
+  creatureName: Will
   speed: 3
-  max_speed: 3
-  targetingSystem: {fileID: 0}
-  enemy: 0
+  maxSpeed: 3
+  controller: {fileID: 0}
+  isEnemy: 0
+  isAI: 0
 --- !u!1001 &1895070188964936838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -169,6 +170,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Humanoid_components
       objectReference: {fileID: 0}
+    - target: {fileID: 1913066452579816968, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1895070188640540241}
+    - target: {fileID: 7253368446708598256, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1895070188640540241}
     - target: {fileID: 8228595137118770235, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
       propertyPath: m_RootOrder
       value: 0

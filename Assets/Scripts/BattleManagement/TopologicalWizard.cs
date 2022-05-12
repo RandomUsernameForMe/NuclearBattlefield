@@ -9,13 +9,13 @@ using UnityEngine;
 /// </summary>
 public class TopologicalWizard : MonoBehaviour
 {
-    private List<StatusEffect> list;
+    private List<Component> list;
     private Dictionary<Type,List<Type>> adj = new Dictionary<Type, List<Type>>();
     private List<Type> answers;
     
     void Awake()
     {
-        list = new List<StatusEffect>(GetComponents<StatusEffect>());
+        list = new List<Component>(GetComponents<Component>());
         foreach (var item in list)
         {
             adj.Add(item.GetType(),new List<Type>());

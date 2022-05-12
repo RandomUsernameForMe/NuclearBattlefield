@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e419a1a99e218d4e902e5d1bf61d3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkDmg: 20
+  value: 15
 --- !u!114 &9212916223026764157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b729deb2cb7ef479ada16660957cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 10
+  value: 10
 --- !u!1 &850580560680887025
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,11 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ed65e03fe52214e82be9526af33e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creature_name: Luna
+  creatureName: Luna
   speed: 3
-  max_speed: 3
-  targetingSystem: {fileID: 0}
-  enemy: 0
+  maxSpeed: 3
+  controller: {fileID: 0}
+  isEnemy: 0
+  isAI: 0
 --- !u!114 &850580560680886927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +279,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Humanoid_components
       objectReference: {fileID: 0}
+    - target: {fileID: 1913066452579816968, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 850580560680886989}
     - target: {fileID: 3047627406571559239, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
       propertyPath: armor
       value: 4
@@ -330,7 +335,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7052970663890660607, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
 --- !u!4 &4676923352861490621 stripped
 Transform:

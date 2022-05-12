@@ -235,12 +235,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ed65e03fe52214e82be9526af33e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creature_name: Bigger Beast
+  creatureName: Smasher
   speed: 3
-  max_speed: 3
-  targetingSystem: {fileID: 0}
-  enemy: 0
-  ai: 1
+  maxSpeed: 3
+  controller: {fileID: 0}
+  isEnemy: 1
+  isAI: 1
 --- !u!1 &3586920969234419676
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 6609889711128805175}
-  def: {r: 0.5395185, g: 0.6509434, b: 0.15045391, a: 1}
+  _default: {r: 1, g: 0.9607843, b: 0, a: 0}
   highlight: {r: 1, g: 0, b: 0, a: 1}
   hover: {r: 0, g: 0, b: 1, a: 1}
   playing: {r: 0, g: 1, b: 0, a: 1}
@@ -560,8 +560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6e44adc6e6a594789e93d54faea6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   health: 80
-  maxHealth: 80
 --- !u!114 &7200180533598325337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08abe62512d71e04483d350c44302e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armor: 10
+  value: 0
 --- !u!114 &3246623480399599342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21776fc6a3469642b5cb86bde828118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 1605648844365298548}
 --- !u!114 &5993135771752744214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,7 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92dfc50140e240541b885c759a70d89f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 1605648844365298548}
 --- !u!114 &2902105441541226465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,7 +771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e419a1a99e218d4e902e5d1bf61d3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkDmg: 15
+  value: 15
 --- !u!114 &3457901731609759242
 MonoBehaviour:
   m_ObjectHideFlags: 0

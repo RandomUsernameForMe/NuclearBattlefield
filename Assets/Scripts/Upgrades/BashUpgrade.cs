@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BashUpgrade : UpgradeBuilder
+public class BashUpgrade : GenericUpgrade
 {
     private int v;
     private int b;

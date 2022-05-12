@@ -10,17 +10,19 @@ using UnityEngine;
 public class Screen
 {
     public Condition cond;
+    public string characterName;
     public bool played;
     public Texture2D source;
 
     public Screen(Texture2D v, Type t, string name)
     {
-        cond = new HasStatus(t, name);
+        cond = new HasStatus(t,name);
+        characterName = name;
         source = v;
         played = false;
     }
 
-    public Screen(Texture2D v, StatusParameter i, double val, string name)
+    public Screen(Texture2D v, QueryParameter i, double val, string name)
     {
         cond = new HasValue(i, val, name);
         source = v;
@@ -34,6 +36,6 @@ public class Screen
 
     public bool Possible()
     {
-        return (!played && cond.Passed());
+        return (!played && cond.isPassed());
     }
 }

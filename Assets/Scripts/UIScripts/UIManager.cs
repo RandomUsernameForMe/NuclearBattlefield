@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
 {
     public HealthBarsUI healthbars_ally;
     public HealthBarsUI healthbars_enemy;
-    public Battlemanager manager;
+    public BattleManager manager;
 
     public TextMeshProUGUI top_text;
     public TextMeshProUGUI ability_description_text;
@@ -33,9 +33,25 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        BattleManager.OnCharacterFinishedTurn += RefreshUI;
+        BattleManager.OnRoundEnded += RefreshUI;
+        BattleManager.OnBattleLoaded += RefreshUI;
+        BattleManager.OnCharacterFinishedTurn += HideCancelButton;
+    }
+
+    private void OnDisable()
+    {
+        BattleManager.OnCharacterFinishedTurn -= RefreshUI;
+        BattleManager.OnRoundEnded -= RefreshUI;
+        BattleManager.OnBattleLoaded -= RefreshUI;
+        BattleManager.OnCharacterFinishedTurn -= HideCancelButton;
+    }
+
     public void RefreshUI()
     {
-        healthbars_ally.RefreshPanel(manager.party);
+        healthbars_ally.RefreshPanel(manager.allyParty);
         healthbars_enemy.RefreshPanel(manager.enemyParty);
     }
 
@@ -48,14 +64,14 @@ public class UIManager : MonoBehaviour
         top_text.text = creature.creatureName + "'s turn";
         creature.GetComponent<Creature>().UpdateUI();
         var action = new Query(QueryType.Description);
-        action.Add(StatusParameter.SpecialName, 0);
+        action.Add(QueryParameter.SpecialName, 0);
         action = manager.GetCurrentCreature().GetComponent<QueryHandler>().ProcessQuery(action);
         specialButton.GetComponentInChildren<TextMeshProUGUI>().text = string.Join(" ", action.descs);
     }
 
     public void ShowAbilityDescription() {
         var action = new Query(QueryType.Description);
-        action.Add(StatusParameter.Basic, 0);
+        action.Add(QueryParameter.Basic, 0);
         action = manager.GetCurrentCreature().GetComponent<QueryHandler>().ProcessQuery(action);
         ability_description_text.text = string.Join(" ", action.descs);
         ability_description_text.gameObject.SetActive(true);
@@ -63,7 +79,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowSpecialAbilityDescription() {
         var action = new Query(QueryType.Description);
-        action.Add(StatusParameter.Special, 0);
+        action.Add(QueryParameter.Special, 0);
         action = manager.GetCurrentCreature().GetComponent<QueryHandler>().ProcessQuery(action);
         ability_description_text.text = string.Join(" ", action.descs);
         ability_description_text.gameObject.SetActive(true);
@@ -90,10 +106,10 @@ public class UIManager : MonoBehaviour
     public void CancelAttack()
     {
         LockButtons(false);
-        var party = manager.party;
+        var party = manager.allyParty;
         var enemyParty = manager.enemyParty;
-        party.ResetHighlights();
-        enemyParty.ResetHighlights();
+        party.ResetColors();
+        enemyParty.ResetColors();
         HideCancelButton();
     }
     public void LockButtons(bool val)

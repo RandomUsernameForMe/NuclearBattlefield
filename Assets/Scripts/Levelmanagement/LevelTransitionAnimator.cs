@@ -9,8 +9,8 @@ public class LevelTransitionAnimator : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        LevelManager.OnBattleLoaded += PlayLoadingAnimation;
-        LevelManager.OnCampfireLoaded += PlayLoadingAnimation;
+        LevelManager.OnBattleSceneLoaded += PlayLoadingAnimation;
+        LevelManager.OnCampfireSceneLoaded += PlayLoadingAnimation;
     }
 
     void PlayLoadingAnimation()

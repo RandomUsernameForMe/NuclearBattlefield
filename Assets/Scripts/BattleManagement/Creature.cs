@@ -42,17 +42,19 @@ public class Creature : MonoBehaviour
     /// </summary>
     /// <param name="ind">The Status efect we are asking for</param>
     /// <returns>Answer</returns>
-    public bool Is(StatusParameter ind)
+    public bool Is(QueryParameter ind)
     {
-        var query = new Query(QueryType.Question);
+        var query = Query.question;
         query.Add(ind, 0);
         query = ProcessQuery(query);
         if (query.parameters[ind] == 0)
         {
+            query.Clear();
             return false;
         }
         else
         {
+            query.Clear();
             return true;
         }
     }
@@ -60,6 +62,15 @@ public class Creature : MonoBehaviour
     public void ResetSpeed() 
     {
         speed = maxSpeed;
+    }
+
+    public int GetSpeed()
+    {
+        if (Is(QueryParameter.CanAct))
+        {
+            return speed;
+        }
+        else return 0;
     }
 
     public void UpdateUI()
@@ -92,18 +103,28 @@ public class Creature : MonoBehaviour
     public double GetMaxHealth()
     {
         Health health = GetComponentInChildren<Health>();
-        if (health != null) return health.maxHealth;
+        if (health != null) return health.value;
         return 0;
     }
 
     public void FullHeal()
     {
         Health health = GetComponentInChildren<Health>();
-        health.health = health.maxHealth;
+        health.health = health.value;
     }
 
     public void Move(Vector3 other)
     {
         transform.parent.position = other;
-    }    
+    }
+
+    internal void FullReset()
+    {
+        FullHeal();
+        var tempEffects = GetComponentsInChildren<TimedEffect>();
+        foreach (var item in tempEffects)
+        {
+            Destroy(item);
+        }
+    }
 }

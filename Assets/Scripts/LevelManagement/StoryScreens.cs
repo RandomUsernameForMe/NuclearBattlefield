@@ -50,23 +50,23 @@ public class StoryScreens : MonoBehaviour, IPointerClickHandler
         list.Add(new Screen(third1, 3));
 
         // Death related
-        list.Add(new Screen(special1, StatusParameter.Dead,1,"Sonnie"));
-        list.Add(new Screen(special2, StatusParameter.Dead, 1, "Will"));
-        list.Add(new Screen(special3, StatusParameter.Dead, 1, "Moon"));
+        list.Add(new Screen(special1, QueryParameter.Dead,1,"Sonnie"));
+        list.Add(new Screen(special2, QueryParameter.Dead, 1, "Will"));
+        list.Add(new Screen(special3, QueryParameter.Dead, 1, "Moon"));
 
         // Destroyer related
         list.Add(new Screen(special4, typeof(Destroyer),"Moon"));
         list.Add(new Screen(special5, typeof(Destroyer), "Moon"));
-        list.Add(new Screen(destroy1, StatusParameter.DestroyerUsed, 1,"Moon"));
-        list.Add(new Screen(destroy2, StatusParameter.DestroyerUsed, 1, "Moon"));
-        list.Add(new Screen(destroy3, StatusParameter.DestroyerUsed, 2, "Moon"));
-        list.Add(new Screen(destroy4, StatusParameter.DestroyerUsed, 2, "Moon"));
+        list.Add(new Screen(destroy1, QueryParameter.DestroyerUsed, 1,"Moon"));
+        list.Add(new Screen(destroy2, QueryParameter.DestroyerUsed, 1, "Moon"));
+        list.Add(new Screen(destroy3, QueryParameter.DestroyerUsed, 2, "Moon"));
+        list.Add(new Screen(destroy4, QueryParameter.DestroyerUsed, 2, "Moon"));
         PreparePossibleImages();
     }
 
     private void OnEnable()
     {
-        LevelManager.OnBattleLoaded += PrepareScreens;
+        LevelManager.OnBattleSceneLoaded += PrepareScreens;
     }
 
     public void PrepareScreens()

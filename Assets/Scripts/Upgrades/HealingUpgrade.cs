@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealingUpgrade : UpgradeBuilder
+public class HealingUpgrade : GenericUpgrade
 {
     private int v;
     public HealingUpgrade(int v)
@@ -15,6 +15,6 @@ public class HealingUpgrade : UpgradeBuilder
 
     public override void Upgrade(Creature creature)
     {
-        creature.GetComponentInChildren<HealingWave>().strength += v;
+        creature.GetComponentInChildren<HealingWave>().value += v;
     }
 }

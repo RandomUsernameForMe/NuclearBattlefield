@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157c68900039e904aa9f3234a6a78b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 0
+  power: 2
 --- !u!114 &3353577984872040775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c02e925d6ae124a9f079b844a2c1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potency: 15
+  value: 10
   duration: 2
 --- !u!114 &2337044603392904629
 MonoBehaviour:
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e419a1a99e218d4e902e5d1bf61d3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkDmg: 15
+  value: 15
 --- !u!114 &3304449552724340656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,11 +153,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ed65e03fe52214e82be9526af33e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creature_name: Sonnie
+  creatureName: Sonnie
   speed: 4
-  max_speed: 4
-  targetingSystem: {fileID: 0}
-  enemy: 0
+  maxSpeed: 4
+  controller: {fileID: 0}
+  isEnemy: 0
+  isAI: 0
 --- !u!114 &5623820661035128141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,6 +322,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Humanoid
       objectReference: {fileID: 0}
+    - target: {fileID: 1913066452579816968, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 5623820661035128183}
     - target: {fileID: 7253368446708598256, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
       propertyPath: animator
       value: 

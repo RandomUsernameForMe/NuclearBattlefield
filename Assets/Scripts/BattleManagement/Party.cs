@@ -13,18 +13,23 @@ public class Party : MonoBehaviour
 
     private void OnEnable()
     {
-        LevelManager.OnBattleLoaded += SetBattlePose;
-        LevelManager.OnBattleLoaded += ResetSpeed;
-        LevelManager.OnBattleLoaded += ResetColors;
-        LevelManager.OnCampfireLoaded += SetCampfirePose;
+        LevelManager.OnBattleSceneLoaded += SetBattlePose;
+        LevelManager.OnBattleSceneLoaded += ResetSpeed;
+        LevelManager.OnBattleSceneLoaded += ResetColors;
+        LevelManager.OnCampfireSceneLoaded += SetCampfirePose;
+        BattleManager.OnCharacterFinishedTurn += ResetColors;
+        BattleManager.OnRoundEnded += ResetSpeed;
+
     }
 
     private void OnDisable()
     {
-        LevelManager.OnBattleLoaded -= SetBattlePose;
-        LevelManager.OnBattleLoaded -= ResetSpeed;
-        LevelManager.OnBattleLoaded -= ResetColors;
-        LevelManager.OnCampfireLoaded -= SetCampfirePose;
+        LevelManager.OnBattleSceneLoaded -= SetBattlePose;
+        LevelManager.OnBattleSceneLoaded -= ResetSpeed;
+        LevelManager.OnBattleSceneLoaded -= ResetColors;
+        LevelManager.OnCampfireSceneLoaded -= SetCampfirePose;
+        BattleManager.OnCharacterFinishedTurn -= ResetColors;
+        BattleManager.OnRoundEnded -= ResetSpeed;
     }
 
     /// <summary>
@@ -53,7 +58,7 @@ public class Party : MonoBehaviour
     /// <summary>
     /// Triggers timed effects such as poison or stun.
     /// </summary>
-    public void Tick()
+    public void TickTimedEffects()
     {
         for (int i = 0; i < party.Count; i++)
         {
@@ -87,24 +92,14 @@ public class Party : MonoBehaviour
         return returnValue;
     }    
 
-    internal void Reset()
+    internal void FullReset()
     {
         ResetSpeed();
-        ResetHighlights();
-        var allParty = GetParty();
-        foreach (var item in allParty)
-        {
-            item.GetComponentInChildren<Creature>().FullHeal(); ;
-        }
-    }
-
-    public void ResetHighlights()
-    {
         ResetColors();
         var allParty = GetParty();
         foreach (var item in allParty)
         {
-            item.GetComponentInChildren<RingHighlighter>().Reset(); ;
+            item.GetComponentInChildren<Creature>().FullReset(); ;
         }
     }
 
@@ -124,5 +119,24 @@ public class Party : MonoBehaviour
         {
             item.GetComponentInChildren<RingHighlighter>().Reset(); ;
         }
+    }
+
+    public override string ToString()
+    {
+        var HPs = new List<double>();
+        foreach (var item in party)
+        {
+            HPs.Add(item.GetComponentInChildren<Creature>().GetMaxHealth());
+        }
+
+        var names = new List<string>();
+        foreach (var item in party)
+        {
+            names.Add(item.GetComponentInChildren<Creature>().name);
+        }
+
+        return String.Format("({4}: {0}, {5}: {1}, {6}: {2}, {7}: {3})",
+            HPs[0], HPs[1], HPs[2], HPs[3],
+           names[0], names[1], names[2], names[3]);
     }
 }

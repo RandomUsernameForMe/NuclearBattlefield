@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerStrikeUpgrade : UpgradeBuilder
+public class PowerStrikeUpgrade : GenericUpgrade
 {
     private int v;
     public PowerStrikeUpgrade(int v)

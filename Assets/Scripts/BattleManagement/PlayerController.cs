@@ -11,9 +11,10 @@ using UnityEngine.UI;
 /// </summary>
 public class PlayerController : Controller
 {
-    public Battlemanager manager;
+    public BattleManager manager;
     public Query actionBuffer;
-    public Button cancelButton;  
+    public Button cancelButton;
+    public UIManager UIManager;
 
     /// <summary>
     /// The function is called after a target has been picked a also handles swaps.
@@ -31,7 +32,7 @@ public class PlayerController : Controller
                 manager.CurrentCreaturePlays(target, actionBuffer);
                 break;
         }
-        manager.party.ResetColors();
+        manager.allyParty.ResetColors();
         manager.enemyParty.ResetColors();
     }
 
@@ -53,7 +54,7 @@ public class PlayerController : Controller
     public void GenerateBasicAttackAndPickTarget()
     {
         Query action = new Query(QueryType.AttackBuild);
-        action.parameters.Add(StatusParameter.Basic,1);
+        action.parameters.Add(QueryParameter.Basic,1);
         action = manager.GetCurrentCreature().GetComponent<QueryHandler>().ProcessQuery(action);
         PreparePossibleTargets(action);
     }
@@ -64,7 +65,7 @@ public class PlayerController : Controller
     public void GenerateSpecialAttackAndPickTarget()
     {
         Query action = new Query(QueryType.AttackBuild);
-        action.parameters.Add(StatusParameter.Special, 1);
+        action.parameters.Add(QueryParameter.Special, 1);
         action = manager.GetCurrentCreature().GetComponent<QueryHandler>().ProcessQuery(action);
         PreparePossibleTargets(action);
     }
@@ -74,10 +75,10 @@ public class PlayerController : Controller
     /// </summary>
     public void Swap()
     {
-        List<StatusParameter> keys = new List<StatusParameter>();
-        keys.Add(StatusParameter.Ally);
-        List<(int, int, bool)> pos = TargetingSystem.PickViableTargets(keys, manager.GetCurrentCreature().isEnemy);
-        GetComponent<UIManager>().LockButtons(true);
+        List<QueryParameter> keys = new List<QueryParameter>();
+        keys.Add(QueryParameter.Ally);
+        List<int> pos = TargetingSystem.PickViableTargets(keys, manager.GetCurrentCreature().isEnemy);
+        UIManager.GetComponent<UIManager>().LockButtons(true);
         actionBuffer = new Query(QueryType.Swap);
         PrepareCreaturesForClicks(pos);
     }
@@ -90,10 +91,10 @@ public class PlayerController : Controller
     /// <param name="action"></param>
     public void PreparePossibleTargets(Query action)
     {
-        List<StatusParameter> keys = new List<StatusParameter>(action.parameters.Keys);
-        List<(int, int, bool)> pos = TargetingSystem.PickViableTargets(keys, manager.GetCurrentCreature().isEnemy);
+        List<QueryParameter> keys = new List<QueryParameter>(action.parameters.Keys);
+        List<int> pos = TargetingSystem.PickViableTargets(keys, manager.GetCurrentCreature().isEnemy);
         actionBuffer = action;
-        GetComponent<UIManager>().LockButtons(true);
+        UIManager.GetComponent<UIManager>().LockButtons(true);
         PrepareCreaturesForClicks(pos);
         cancelButton.gameObject.SetActive(true);
     }
@@ -103,33 +104,20 @@ public class PlayerController : Controller
     /// Targets need to be clickable so player can pick one
     /// </summary>
     /// <param name="pos">List of targets to highlight</param>
-    private void PrepareCreaturesForClicks(List<(int, int, bool)> pos)
+    private void PrepareCreaturesForClicks(List<int> pos)
     {
-        var party = manager.party.GetParty();
+        var party = manager.allyParty.GetParty();
         var enemyParty = manager.enemyParty.GetParty();
 
         foreach (var item in pos)
-        {
-            if (item.Item3)
-            {
-                var target = enemyParty[GetCreatureByPosition(item.Item1, item.Item2)].GetComponentInChildren<Creature>();
-                if (!target.Is(StatusParameter.Dead)) target.Highlight();
-            }
-            else
-            {
-                var target = party[GetCreatureByPosition(item.Item1, item.Item2)].GetComponentInChildren<Creature>();
-                if (!target.Is(StatusParameter.Dead)) target.Highlight();
-            }
-        }
-    }
-
-    public static int GetCreatureByPosition(int X, int Y)
-    {
-        return 2 * X + Y;
+        {            
+            var target = TargetingSystem.GetCreatureByPosition(item, manager);
+            if (!target.Is(QueryParameter.Dead)) target.Highlight();
+        }        
     }
 
     public override void CreatureActs(Creature creature)
     {
-        GetComponent<UIManager>().PrepareAbilityControlPanel(creature);
+        UIManager.PrepareAbilityControlPanel(creature);
     }
 }
