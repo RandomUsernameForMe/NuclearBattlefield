@@ -94,6 +94,7 @@ public class BattleManager : MonoBehaviour
             Vector3 buffer = currentCreature.transform.position;
             currentCreature.Move(target.transform.position);
             target.Move(buffer);
+            target.UpdateUI();
         }
 
         if (query.type == QueryType.Attack || query.type == QueryType.AttackBuild)
@@ -105,9 +106,9 @@ public class BattleManager : MonoBehaviour
             // And now i want the actually attack to proceed
             query.type = QueryType.Attack;
             target.GetComponent<QueryHandler>().ProcessQuery(query);
-
+            target.UpdateUI();
         }
-        target.UpdateUI();
+        
         OnCharacterFinishedTurn();
     }
 

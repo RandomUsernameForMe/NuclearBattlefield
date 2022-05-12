@@ -43,18 +43,23 @@ public class AIController : Controller
         }
         else
         {
-            rnd = UnityEngine.Random.Range(0, 2);
-            query = new Query(QueryType.AttackBuild);
-            if (rnd == 0) query.Add(QueryParameter.Basic, 0);
-            else query.Add(QueryParameter.Special, 0);
-            query = creature.GetComponent<QueryHandler>().ProcessQuery(query);
+            var found = false;
+            for (int i = 0; i < 3; i++)
+            {
+                if (!found)
+                {
+                    rnd = UnityEngine.Random.Range(0, 2);
+                    query = new Query(QueryType.AttackBuild);
+                    if (rnd == 0) query.Add(QueryParameter.Basic, 0);
+                    else query.Add(QueryParameter.Special, 0);
+                    query = creature.GetComponent<QueryHandler>().ProcessQuery(query);
+                    found = ActionHasViableTargets(query, creature);
+                }                
+            }
 
-            target = PickRandomTarget(query, creature);
-
+            if (found) target = PickRandomTarget(query, creature);
+            else query.type = QueryType.None;
         }
-        
-
-
         manager.CurrentCreaturePlays(target, query);
     }
 

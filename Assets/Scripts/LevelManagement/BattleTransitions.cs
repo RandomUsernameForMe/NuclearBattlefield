@@ -120,7 +120,7 @@ public class BattleTransitions: MonoBehaviour
     public void TransitionToCampfire()
     {
         info.currUpgPoints = info.currUpgPoints +info.upgPointsGain;
-        info.campfire = true;
+        info.isAtCampfire = true;
         info.gameObject.GetComponent<LevelManager>().LoadCampFire();
     }
 

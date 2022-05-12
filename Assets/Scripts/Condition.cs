@@ -94,6 +94,6 @@ public class IsWhichLevel : Condition
     public override bool isPassed()
     {
         var info = GameObject.Find("LevelInfo").GetComponent<LevelInfo>();
-        return (info.currLevel == level && info.campfire == false);
+        return (info.currLevel == level && info.isAtCampfire == false);
     }
 }

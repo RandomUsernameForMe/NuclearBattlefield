@@ -33,31 +33,31 @@ public class LevelManager : MonoBehaviour
     {
         anim.SetTrigger("Level1");
         info.currLevel = 1;
-        info.campfire = false;
+        info.isAtCampfire = false;
         LoadLevel(BATTLELEVEL, 2);
     }
 
     public void RepeatLevel()
     {
         info.upgPointsGain = info.upgPointsGain - 2;
-        info.campfire = false;
+        info.isAtCampfire = false;
         LoadLevel(BATTLELEVEL, 1);
     }
 
-    public void NextLevel()
+    public void LoadNextLevel()
     {
         info.ResetPointsGain();
         if (info.currLevel != MAXLEVEL)
         {
             info.currLevel += 1;
         }
-        info.campfire = false;
+        info.isAtCampfire = false;
         LoadLevel(BATTLELEVEL,1);
     }
 
     internal void LoadCampFire()
     {
-        info.campfire = true;
+        info.isAtCampfire = true;
         LoadLevel(CAMPFIRELEVEL,1);
     }
 
