@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class LongWeapon : Component
 {
-
     public override Query ProcessQuery(Query action)
     {
         if (action.type == QueryType.AttackBuild)

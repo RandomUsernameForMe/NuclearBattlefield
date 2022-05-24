@@ -3,11 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoisonResistance : Component
+public class ElementalResistance : UpgradableComponent
 {
-    /*
-    
-    */
     public double resistance;
 
     public override Query ProcessQuery(Query action)
@@ -18,14 +15,9 @@ public class PoisonResistance : Component
             {
                 action.effects[QueryParameter.Poison].value = Math.Floor(action.effects[QueryParameter.Poison].value * (1-resistance));
             }
-            if (action.parameters.ContainsKey(QueryParameter.PoisonAmp))
-            {                
-                Poison poison = GetComponent<Poison>();
-                if (poison != null)
-                {
-                  poison.potency += action.parameters[QueryParameter.PoisonAmp];
-                  poison.timer += (int)action.parameters[QueryParameter.PoisonAmp];
-                }                
+            if (action.effects.ContainsKey(QueryParameter.FireDmg))
+            {
+                action.effects[QueryParameter.FireDmg].value = Math.Floor(action.effects[QueryParameter.FireDmg].value * (1 - resistance));
             }
         }
         if (action.type == QueryType.Description)
@@ -41,7 +33,19 @@ public class PoisonResistance : Component
     public override List<(Type, Type)> GetRequirements()
     {
         var returnValue = new List<(Type, Type)>();
-        returnValue.Add((typeof(PoisonResistance), typeof(Health)));
+        returnValue.Add((typeof(ElementalResistance), typeof(Health)));
         return returnValue;
+    }
+
+    public override bool TryUpgrade(bool positive)
+    {
+        if (resistance <= 0.1)
+        {
+            Destroy(this);
+            return true;
+        }
+        if (positive) resistance += 0.1;
+        else resistance -= 0.1;
+        return true;
     }
 }

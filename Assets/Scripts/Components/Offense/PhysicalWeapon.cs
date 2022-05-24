@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhysicalWeapon : ValueComponent
+public class PhysicalWeapon : UpgradableComponent
 {
-
+    public int power;
     public override List<(Type, Type)> GetRequirements()
     {
         var returnValue = new List<(Type, Type)>();
@@ -19,7 +19,7 @@ public class PhysicalWeapon : ValueComponent
         {
             if (action.parameters.ContainsKey(QueryParameter.Basic))
             {
-                action.Add(QueryParameter.PhysDmg, value);
+                action.Add(QueryParameter.PhysDmg, power);
             }
         }
         if (action.type == QueryType.Description)
@@ -30,9 +30,17 @@ public class PhysicalWeapon : ValueComponent
             }
             if (action.parameters.ContainsKey(QueryParameter.Tooltip))
             {
-                action.Add(String.Format("Attack: {0} dmg", value));
+                action.Add(String.Format("Attack: {0} dmg", power));
             }
         }
         return action;
+    }
+
+    public override bool TryUpgrade(bool positive)
+    {
+        if (power == 0) return false;
+        if (positive) power += 5;
+        else power -= 5;
+        return true;
     }
 }

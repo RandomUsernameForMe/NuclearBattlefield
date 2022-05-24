@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6e44adc6e6a594789e93d54faea6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 50
   health: 50
+  maxHealth: 50
 --- !u!114 &3047627406571559239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08abe62512d71e04483d350c44302e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 5
+  armor: 3
 --- !u!114 &7253368446708598256
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class ShortWeapon : Component
 {
-
     public override Query ProcessQuery(Query action)
     {
         if (action.type == QueryType.AttackBuild)
         {
             if (action.parameters.ContainsKey(QueryParameter.Basic))
             {
-                //action.Add(Ind.Close, 1);
+                action.Add(QueryParameter.Close, 1);
                 action.Add(QueryParameter.Enemy, 1);
             }            
         }

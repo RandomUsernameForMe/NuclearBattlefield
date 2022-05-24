@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e419a1a99e218d4e902e5d1bf61d3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 20
+  power: 20
 --- !u!114 &7430019721183726057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f02dde7e45c01c44ba8e1399af59f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gigaStrength: 35
+  power: 30
 --- !u!114 &247751241062838788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +172,14 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 7684186332602213574}
+    - target: {fileID: 3047627406571559239, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: armor
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293673506591636663, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7253368446708598256, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
       propertyPath: animator
       value: 

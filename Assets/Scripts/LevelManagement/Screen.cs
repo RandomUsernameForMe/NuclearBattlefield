@@ -14,9 +14,9 @@ public class Screen
     public bool played;
     public Texture2D source;
 
-    public Screen(Texture2D v, Type t, string name)
+    public Screen(Texture2D v, Condition condition, string name)
     {
-        cond = new HasStatus(t,name);
+        cond = condition;
         characterName = name;
         source = v;
         played = false;

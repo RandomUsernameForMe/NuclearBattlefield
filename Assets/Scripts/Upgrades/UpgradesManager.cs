@@ -39,7 +39,7 @@ public class UpgradesManager : MonoBehaviour
         
         foreach (var item in party.party)
         {
-            GenerateOptions(item.gameObject, offsetX);
+            GenerateOptions(item.GetComponentInChildren<Creature>(), offsetX);
             offsetX -= oX;
         }
     }
@@ -49,60 +49,27 @@ public class UpgradesManager : MonoBehaviour
     /// </summary>
     /// <param name="item">Creatur to generate upgrades for</param>
     /// <param name="offsetX">Coordinates for where to generate buttons</param>
-    private void GenerateOptions(GameObject item, float offsetX)
+    private void GenerateOptions(Creature creature, float offsetX)
     {        
-        var effects = item.gameObject.GetComponentsInChildren<Component>();
-        var upgradeBuilders = new List<GenericUpgrade>();
-        
-        // hard coded upgrade possibilities
-        if (Contains(effects,typeof(ShieldBash))) 
-        {
-            upgradeBuilders.Add(new BashUpgrade(5,1));
-        }
-        if (Contains(effects, typeof(PhysicalWeapon)))
-        {
-            upgradeBuilders.Add(new BasicAttackUpgrade(5));
-        }
-        if (Contains(effects, typeof(PoisonBlast)) && Contains(effects,typeof(PoisonAmplifier)))
-        {
-            upgradeBuilders.Add(new PoisonUpgrade(1));
-        }
-        if (Contains(effects, typeof(MightyWeapon)))
-        {
-            upgradeBuilders.Add(new PowerStrikeUpgrade(1));
-        }
-        if (Contains(effects, typeof(HealingWave)))
-        {
-            upgradeBuilders.Add(new HealingUpgrade(10));
-        }
+        var viableUpgradesList = new List<Upgrade>();
+        var upgrades = UpgradeStorage.GetPositiveUpgrades();
 
-        // Here I need to find out whether creature is Dead
-        var query = new Query(QueryType.Question);
-        query.Add(QueryParameter.Dead,0);
-        query = item.GetComponentInChildren<Creature>().ProcessQuery(query);
-
-        if (Contains(effects, typeof(Health)) && query.parameters[QueryParameter.Dead] == 0)
+        foreach (var item in upgrades)
         {
-            upgradeBuilders.Add(new CampfireFullHeal());
-        }
-        if (Contains(effects, typeof(Health)) && query.parameters[QueryParameter.Dead] == 1)
-        {
-            upgradeBuilders.Add(new CampfireRevive());
-        }
+            if (item.IsConditionPassed(creature)) viableUpgradesList.Add(item.Upgrade);
+        }        
 
         // After all options have been generates, create desired buttons
         float offsetY = 0;
-        foreach (var builder in upgradeBuilders)
+        foreach (var upgrade in viableUpgradesList)
         {
             var carrier = GameObject.Find("ButtonCarrier");
             GameObject buttonObj = Instantiate(btnPrefab,carrier.transform,false);
             buttonObj.transform.position = new Vector3(buttonObj.transform.position.x+offsetX, buttonObj.transform.position.y+ offsetY, 0);
-            buttonObj.GetComponentInChildren<TextMeshProUGUI>().text = builder.buttonText;
+            buttonObj.GetComponentInChildren<TextMeshProUGUI>().text = upgrade.buttonText;
             var button = buttonObj.GetComponentInChildren<Button>();
-            button.onClick.AddListener(delegate { builder.Upgrade(item.GetComponentInChildren<Creature>()); });
-            button.onClick.AddListener(delegate { UpdatePoints(); });
-            button.onClick.AddListener(delegate { buttonObj.SetActive(false); });
-            buttonObj.GetComponentInChildren<UpgradeHolder>().upg = builder;
+            button.onClick.AddListener(delegate { UpgradeButtonPress(upgrade,creature,buttonObj); });
+            buttonObj.GetComponentInChildren<UpgradeHolder>().upg = upgrade;
             offsetY += oY;
         }
     }
@@ -129,6 +96,17 @@ public class UpgradesManager : MonoBehaviour
             {
                 buttons[i].GetComponentInChildren<Button>().interactable = false;
             }
+        }
+    }
+
+    public void UpgradeButtonPress(Upgrade upgrade, Creature creature, GameObject buttonObj)
+    {
+        var upgSuccessful = upgrade.TryUpgrade(creature,true);
+        if (upgSuccessful)
+        {
+            PayPoints(upgrade.cost);
+            UpdatePoints();
+            buttonObj.SetActive(false);
         }
     }
 

@@ -32,14 +32,21 @@ public class AIController : Controller
             // Choose attack 
             (int, int) t = PickActionToPlay(creature);
 
-            // Prepare attack 
-            query = new Query(QueryType.AttackBuild);
-            if (t.Item1 == 0) query.Add(QueryParameter.Basic, 0);
-            else query.Add(QueryParameter.Special, 0);
-            query = creature.GetComponent<QueryHandler>().ProcessQuery(query);
+            if (t == (-1, -1)) {
+                query = new Query(QueryType.None);
+                target = null;
+            }
+            else
+            {
+                // Prepare attack 
+                query = new Query(QueryType.AttackBuild);
+                if (t.Item1 == 0) query.Add(QueryParameter.Basic, 0);
+                else query.Add(QueryParameter.Special, 0);
+                query = creature.GetComponent<QueryHandler>().ProcessQuery(query);
 
-            // Prepare target 
-            target = TargetingSystem.GetCreatureByPosition(t.Item2, manager);
+                // Prepare target 
+                target = TargetingSystem.GetCreatureByPosition(t.Item2, manager);
+            }            
         }
         else
         {
@@ -90,7 +97,7 @@ public class AIController : Controller
             TryAllPossibleTargets(query, pos, results, 1);
 
             double max = 0;
-            (int, int) maxItem = (0,0);
+            (int, int) maxItem = (-1,-1);
             foreach (var item in results.Keys)
             {
                 int rnd = UnityEngine.Random.Range(0, 10);

@@ -43,10 +43,10 @@ public class SimulationRunner : MonoBehaviour
         text.text = String.Format("Played Games: {0} , Winrate: {1} %", gamesPlayed, winrate);
     }
 
-    public void SetUpSimulation(float difficultylevel)
+    public void SetUpSimulation( int upgradepoints)
     {
         Party allyPartyCopy = Instantiate(GameObject.Find("AllyParty")).GetComponent<Party>();
-        Party enemyParty = GenerateEnemyParty(difficultylevel);
+        Party enemyParty = GenerateEnemyParty(upgradepoints);
         allyPartyCopy.FullReset();
         var transform = allyPartyCopy.gameObject.transform;
         transform.position += new Vector3(0, -5, 0);
@@ -81,8 +81,8 @@ public class SimulationRunner : MonoBehaviour
             finished = AreSimulationsSatisfied(results);
             if (!finished)
             {
-                var difficultyLevel = CalculateDifficultyLevel(results);
-                manager.enemyParty = modifier.ModifyPartyDifficulty(enemyParty, difficultyLevel);
+                var points = CalculateUpgradePoints(results);
+                manager.enemyParty = modifier.ModifyPartyDifficulty(enemyParty, points);
                 manager.LoadAndReset();                
             }
         }
@@ -105,13 +105,13 @@ public class SimulationRunner : MonoBehaviour
         return (Math.Abs(targetWinrate - winrate) < winrateTolerance);
     }
 
-    public float CalculateDifficultyLevel(List<BattleResults> results)
+    public int CalculateUpgradePoints(List<BattleResults> results)
     {
         int wins = results.Where(x => x.result.Equals(1)).Count();
         int loses = results.Where(x => x.result.Equals(2)).Count();
-        float winrate = 100 * ((float)wins / (wins + loses));
+        int winrate = 100 * (wins / (wins + loses));
 
-        return (winrate-targetWinrate)/100+1;
+        return (int) (winrate-targetWinrate)/2;
     }
 
     private void SetupManager(BattleManager manager,Party party, Party enemyParty, Controller aIControl)
@@ -125,7 +125,7 @@ public class SimulationRunner : MonoBehaviour
         }
     }
 
-    private Party GenerateEnemyParty(float difficultyLevel)
+    private Party GenerateEnemyParty(int upgradepoints)
     {
         ClearEnemyParty();
         var obj = GameObject.Find("LevelInfo");
@@ -138,7 +138,7 @@ public class SimulationRunner : MonoBehaviour
             BattleTransitions.LoadEnemiesIntoParty(enemyParty, 1, bestiary);
         }
         BattleTransitions.LoadEnemiesIntoParty(enemyParty, 1, bestiary);
-        modifier.ModifyPartyDifficulty(enemyParty,difficultyLevel);
+        modifier.ModifyPartyDifficulty(enemyParty,upgradepoints);
         return enemyParty;
     }    
 

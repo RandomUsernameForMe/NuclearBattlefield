@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UpgradeHolder : MonoBehaviour
 {
-    public GenericUpgrade upg;
+    public Upgrade upg;
     public Text txt;
 
     public void Start()

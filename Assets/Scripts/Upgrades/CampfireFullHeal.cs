@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CampfireFullHeal : GenericUpgrade
+public class CampfireFullHeal : Upgrade
 {
     private int v;
 
@@ -13,9 +13,10 @@ public class CampfireFullHeal : GenericUpgrade
         descriptionText = "Heals character. Costs " + cost + ".";
     }
 
-    public override void Upgrade(Creature creature)
+    public override bool TryUpgrade(Creature creature, bool positive)
     {
         creature.GetComponentInChildren<Health>().Heal();
         UpgradesManager.PayPoints(cost);
+        return true;
     }
 }

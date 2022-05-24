@@ -47,6 +47,7 @@ public enum QueryParameter
     Far,
     Enemy,
     Ally,
+    FireDmg,
 }
 
 public abstract class Component : MonoBehaviour

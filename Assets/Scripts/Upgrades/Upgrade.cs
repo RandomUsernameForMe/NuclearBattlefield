@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GenericUpgrade
+public abstract class Upgrade
 {
     public string buttonText;
     public string descriptionText;
     public int cost;
 
-    abstract public void Upgrade(Creature creature);
-
+    abstract public bool TryUpgrade(Creature creature, bool positive);
 }

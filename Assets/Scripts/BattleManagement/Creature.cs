@@ -103,14 +103,14 @@ public class Creature : MonoBehaviour
     public double GetMaxHealth()
     {
         Health health = GetComponentInChildren<Health>();
-        if (health != null) return health.value;
+        if (health != null) return health.maxHealth;
         return 0;
     }
 
     public void FullHeal()
     {
         Health health = GetComponentInChildren<Health>();
-        health.health = health.value;
+        health.health = health.maxHealth;
     }
 
     public void Move(Vector3 other)

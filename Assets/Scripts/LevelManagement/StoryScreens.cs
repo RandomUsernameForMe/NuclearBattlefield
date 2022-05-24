@@ -55,8 +55,8 @@ public class StoryScreens : MonoBehaviour, IPointerClickHandler
         list.Add(new Screen(special3, QueryParameter.Dead, 1, "Moon"));
 
         // Destroyer related
-        list.Add(new Screen(special4, typeof(Destroyer),"Moon"));
-        list.Add(new Screen(special5, typeof(Destroyer), "Moon"));
+        list.Add(new Screen(special4, new ComponentCondition<Destroyer>("Moon"), "Moon"));
+        list.Add(new Screen(special5, new ComponentCondition<Destroyer>("Moon"), "Moon"));
         list.Add(new Screen(destroy1, QueryParameter.DestroyerUsed, 1,"Moon"));
         list.Add(new Screen(destroy2, QueryParameter.DestroyerUsed, 1, "Moon"));
         list.Add(new Screen(destroy3, QueryParameter.DestroyerUsed, 2, "Moon"));

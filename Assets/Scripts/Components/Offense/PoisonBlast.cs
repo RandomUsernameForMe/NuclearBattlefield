@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PoisonBlast: ValueComponent
+public class PoisonBlast: UpgradableComponent
 {
+    private int potency;
     public int duration;
+    private int upgradeLevel;
 
     public override Query ProcessQuery(Query action)
     {
@@ -13,7 +15,7 @@ public class PoisonBlast: ValueComponent
         {
             if (action.parameters.ContainsKey(QueryParameter.Special))
             {
-                action.Add(QueryParameter.Poison,new PoisonBuilder(value, duration));
+                action.Add(QueryParameter.Poison,new PoisonBuilder(potency, duration));
             }
         }
         if (action.type == QueryType.Description)
@@ -28,7 +30,7 @@ public class PoisonBlast: ValueComponent
             }
             if (action.parameters.ContainsKey(QueryParameter.Tooltip))
             {
-                action.Add(String.Format("Poison: {0} dmg, {1} turn(s)", value, duration));
+                action.Add(String.Format("Poison: {0} dmg, {1} turn(s)", potency, duration));
             }
         }
         return action;
@@ -40,6 +42,38 @@ public class PoisonBlast: ValueComponent
         returnValue.Add((typeof(PoisonBlast), typeof(Health)));
         return returnValue;
     }
+
+
+        public override bool TryUpgrade(bool positive)
+    {
+        int newlvl = upgradeLevel;
+        if (positive) newlvl++;
+        else newlvl--;
+
+        switch (newlvl)
+        {
+            case 0:
+                Destroy(this);
+                return true;
+            case 1:
+                duration = 2;
+                potency = 10;
+                break;
+            case 2:
+                duration = 2;
+                potency = 20;
+                break;
+            case 3:
+                duration = 100;
+                potency = 20;
+                break;
+            case 4:
+                return false;
+        }
+        upgradeLevel = newlvl;
+        return true;
+    }
+
 }
 
 public class Poison : TimedEffect

@@ -18,25 +18,17 @@ public abstract class CreatureCondition : Condition
 /// <summary>
 /// Checks whether an object of specific name end cantains a specified StatusEffect
 /// </summary>
-public class HasStatus : CreatureCondition
+public class ComponentCondition<T> : CreatureCondition
 {
-    Type type;
-    private Type t;
 
-    public HasStatus(Type t)
-    {
-        this.t = t;
-    }
 
-    public HasStatus(Type type, Creature creature)
+    public ComponentCondition(Creature creature)
     {
         this.creature = creature;
-        this.type = type;
     }
-    public HasStatus(Type type, string name)
+    public ComponentCondition(string name = "")
     {
         this.name = name;
-        this.type = type;
     }
     override public bool isPassed()
     {
@@ -46,7 +38,7 @@ public class HasStatus : CreatureCondition
             if (temp == null) return false;
             creature = temp.GetComponent<Creature>();
         }
-        return UpgradesManager.Contains(creature.GetComponentsInChildren<Component>(), type);
+        return UpgradesManager.Contains(creature.GetComponentsInChildren<Component>(), typeof(T));
     }
 }
 

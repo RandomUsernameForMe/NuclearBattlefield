@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Wand : Component
 {
-
     public override Query ProcessQuery(Query action)
     {
         if (action.type == QueryType.AttackBuild)

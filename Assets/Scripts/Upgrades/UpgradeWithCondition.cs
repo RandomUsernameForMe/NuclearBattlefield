@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class UpgradeWithCondition
 {
-    CreatureCondition condition;
-    GenericUpgrade upgrade;
+    public Upgrade Upgrade { get; }
+    public CreatureCondition Condition { get; }
 
-    public UpgradeWithCondition(CreatureCondition cond, GenericUpgrade upg)
+    public UpgradeWithCondition(CreatureCondition cond, Upgrade upg)
     {
-        condition = cond;
-        upgrade = upg;
+        Condition = cond;
+        Upgrade = upg;
     }
 
     public bool IsConditionPassed(Creature creature)
     {
-        condition.creature = creature;
-        return condition.isPassed();
+        Condition.creature = creature;
+        return Condition.isPassed();
     }
 
-    public void ApplyUpgrade(Creature creature)
+    public bool TryApplyUpgrade(Creature creature, bool positive)
     {
-        upgrade.Upgrade(creature);
+        return Upgrade.TryUpgrade(creature,positive);
     }
 }

@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : ValueComponent
+public class Health : UpgradableComponent
 {
     public double health;
+    public int maxHealth;
     Animator animator;
 
     private void OnEnable()
@@ -36,7 +37,7 @@ public class Health : ValueComponent
             }
             if (action.parameters.ContainsKey(QueryParameter.Healing))
             {
-                healthChange = Math.Min(action.parameters[QueryParameter.Healing], value-health);
+                healthChange = Math.Min(action.parameters[QueryParameter.Healing], maxHealth-health);
             }
         }
         
@@ -74,11 +75,19 @@ public class Health : ValueComponent
 
     public void Heal()
     {
-        health = value;
+        health = maxHealth;
     }
 
     public override List<(Type, Type)> GetRequirements()
     {
         return null;
+    }
+
+    public override bool TryUpgrade(bool positive)
+    {
+        if (maxHealth <= 20) return false;
+        if (positive) maxHealth += 10;
+        else maxHealth -= 10;
+        return true;
     }
 }

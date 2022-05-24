@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerStrikeUpgrade : GenericUpgrade
+public class DestroyerEquipUpgrade : Upgrade
 {
-    private int v;
-    public PowerStrikeUpgrade(int v)
+    public DestroyerEquipUpgrade()
     {
-        this.v = v;
         cost = 4;
         buttonText = "Equip Destroyer!";
         descriptionText = "Just devastate. Costs " + cost + " to upgrade.";
     }
 
-    public override void Upgrade(Creature creature)
+    public override bool TryUpgrade(Creature creature, bool positive)
     {
         GameObject.Destroy(creature.GetComponentInChildren<MightyWeapon>());
-        creature.gameObject.AddComponent(typeof(Destroyer));
+        creature.gameObject.AddComponent<Destroyer>();
         UpgradesManager.PayPoints(cost);
+        return true;
     }
 }

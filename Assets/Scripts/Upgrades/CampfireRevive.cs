@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CampfireRevive : GenericUpgrade
+public class CampfireRevive : Upgrade
 {
-    private int v;
-
     public CampfireRevive()
     {
         cost = 2;
@@ -13,9 +11,10 @@ public class CampfireRevive : GenericUpgrade
         descriptionText = "Revives and fullheals character. Costs " + cost + ".";
     }
 
-    public override void Upgrade(Creature creature)
+    public override bool TryUpgrade(Creature creature, bool positive)
     {
         creature.GetComponentInChildren<Health>().Heal();
         UpgradesManager.PayPoints(cost);
+        return true;
     }
 }

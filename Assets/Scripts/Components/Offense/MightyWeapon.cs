@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MightyWeapon : Component
+public class MightyWeapon : UpgradableComponent
 {
-    public double gigaStrength;
+    public double power;
 
     public override Query ProcessQuery(Query action)
     {
@@ -14,7 +14,7 @@ public class MightyWeapon : Component
             if (action.parameters.ContainsKey(QueryParameter.Special))
             {
                 action.Add(QueryParameter.Close, 1);
-                action.Add(QueryParameter.PhysDmg, gigaStrength);
+                action.Add(QueryParameter.PhysDmg, power);
             }            
         }
         if (action.type == QueryType.Description)
@@ -29,7 +29,7 @@ public class MightyWeapon : Component
             }
             if (action.parameters.ContainsKey(QueryParameter.Tooltip))
             {
-                action.Add(String.Format("PowerStrike: {0} dmg", gigaStrength));
+                action.Add(String.Format("PowerStrike: {0} dmg", power));
             }
         }
 
@@ -38,5 +38,17 @@ public class MightyWeapon : Component
     public override List<(Type, Type)> GetRequirements()
     {
         return null;
+    }
+
+    public override bool TryUpgrade(bool positive)
+    {
+        if (power <= 20)
+        {
+            Destroy(this);
+            return true;
+        }
+        if (positive) power += 10;
+        else power -= 10;
+        return true;
     }
 }

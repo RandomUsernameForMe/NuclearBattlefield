@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldBash : Component
+public class ShieldBash : UpgradableComponent
 {
-    public float bashStrength;
+    public int bashDmg;
     public int stunDuration;
     public float chance;
+    private int upgradelvl;
     public override List<(Type, Type)> GetRequirements()
     {
         var returnValue = new List<(Type, Type)>();
@@ -15,34 +16,62 @@ public class ShieldBash : Component
         return returnValue;
     }
 
-    public override Query ProcessQuery(Query action)
+    public override Query ProcessQuery(Query query)
     {
-        if (action.type == QueryType.AttackBuild)
+        if (query.type == QueryType.AttackBuild)
         {
-            if (action.parameters.ContainsKey(QueryParameter.Special))
+            if (query.parameters.ContainsKey(QueryParameter.Special))
             {
-                action.Add(QueryParameter.Close, 1);
-                action.Add(QueryParameter.Enemy, 1);
-                action.Add(QueryParameter.PhysDmg, bashStrength);
-                action.Add(QueryParameter.Stun,new StunBuilder(chance,stunDuration));
-                //action.Add(Ind.Push,new Push());
+                query.Add(QueryParameter.Close, 1);
+                query.Add(QueryParameter.Enemy, 1);
+                query.Add(QueryParameter.PhysDmg, bashDmg);
+                query.Add(QueryParameter.Stun,new StunBuilder(chance,stunDuration));
             }
         }
-        if (action.type == QueryType.Description)
+        if (query.type == QueryType.Description)
         {
-            if (action.parameters.ContainsKey(QueryParameter.Special))
+            if (query.parameters.ContainsKey(QueryParameter.Special))
             {
-                action.Add("Bashes enemy with a shield. Has a chance to stun and pushes an enemy to the back.");
+                query.Add("Bashes enemy with a shield. Stuns.");
             }
-            if (action.parameters.ContainsKey(QueryParameter.SpecialName))
+            if (query.parameters.ContainsKey(QueryParameter.SpecialName))
             {
-                action.Add("Shield Bash");
+                query.Add("Shield Bash");
             }
-            if (action.parameters.ContainsKey(QueryParameter.Tooltip))
+            if (query.parameters.ContainsKey(QueryParameter.Tooltip))
             {
-                action.Add(String.Format("Bash: {0} dmg, {1} turn stun", bashStrength, stunDuration));
+                query.Add(String.Format("Bash: {0} dmg, {1} turn stun", bashDmg, stunDuration));
             }
         }
-        return action;
+        return query;
+    }
+
+    public override bool TryUpgrade(bool positive)
+    {
+        int newlvl = upgradelvl;
+        if (positive) newlvl++;
+        else newlvl--;
+
+        switch (newlvl) {
+            case 0:
+                Destroy(this);
+                return true;
+            case 1:
+                stunDuration = 1;
+                bashDmg = 10;
+                break;
+            case 2:
+                stunDuration = 1;
+                bashDmg = 20;
+                break;
+            case 3:
+                stunDuration = 2;
+                bashDmg = 25;
+                break;
+            case 4:
+                return false;
+        }
+        upgradelvl = newlvl;
+        return true;
     }
 }
