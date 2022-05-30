@@ -30,6 +30,8 @@ public class BattleManager : MonoBehaviour
     public bool running = false;
     public BattleResults results;
     public float minimalTimeBetweenMoves;
+    private int skipCounter;
+    private bool arficialEnd = false;
 
     private void OnEnable()
     {
@@ -52,7 +54,7 @@ public class BattleManager : MonoBehaviour
 
     public void RunOneTurn()
     {
-        if (IsGameOver())
+        if (IsGameOver() || arficialEnd)
         {
             results = GenerateBattleResults();
             running = false;
@@ -79,6 +81,11 @@ public class BattleManager : MonoBehaviour
 
     public void CurrentCreaturSkips()
     {
+        skipCounter++;
+        if (skipCounter > 3)
+        {
+            arficialEnd = true;
+        }        
         OnCharacterFinishedTurn();
     }
 
@@ -89,6 +96,19 @@ public class BattleManager : MonoBehaviour
     /// <param name="query">Picked or chosen action to perform</param>
     public void CurrentCreaturePlays(Creature target, Query query)
     {
+        if (query.type == QueryType.None)
+        {
+            if (skipCounter >30)
+            {
+                arficialEnd = true;
+            }
+            skipCounter++;
+        }
+        else
+        {
+            skipCounter = 0;
+        }
+
         if (query.type == QueryType.Swap)
         {
             Vector3 buffer = currentCreature.transform.position;
@@ -108,6 +128,7 @@ public class BattleManager : MonoBehaviour
             target.GetComponent<QueryHandler>().ProcessQuery(query);
             target.UpdateUI();
         }
+
         
         OnCharacterFinishedTurn();
     }

@@ -38,9 +38,13 @@ public class PhysicalWeapon : UpgradableComponent
 
     public override bool TryUpgrade(bool positive)
     {
-        if (power == 0) return false;
+
         if (positive) power += 5;
-        else power -= 5;
+        else
+        {
+            if (power <= 10) return false;
+            power -= 5;
+        }
         return true;
     }
 }

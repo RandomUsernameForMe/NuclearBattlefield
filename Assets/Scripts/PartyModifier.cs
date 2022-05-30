@@ -44,8 +44,8 @@ public class PartyModifier : MonoBehaviour
             if (upgradeSuccesful)
             {
                 points -= possibleUpgrades[rnd].Upgrade.cost;
+                return;
             }
-            continue;
         }
         
     }

@@ -9,7 +9,6 @@ public class ComponentUpgrade<T> : Upgrade where T:UpgradableComponent
     {
         var comp = creature.GetComponentInChildren<T>();
         var upgradeSuccesful = comp.TryUpgrade(positive);
-        if (upgradeSuccesful) UpgradesManager.PayPoints(cost);
         return upgradeSuccesful;
     }
 }

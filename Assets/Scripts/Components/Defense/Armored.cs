@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Armored : UpgradableComponent
 {
-    public int armor;
+    public int armor= 3;
     override public Query ProcessQuery(Query query)
     {
         if (query.type == QueryType.Attack || query.type == QueryType.Question)

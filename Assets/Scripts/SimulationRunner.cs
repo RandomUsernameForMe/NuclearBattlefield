@@ -43,7 +43,7 @@ public class SimulationRunner : MonoBehaviour
         text.text = String.Format("Played Games: {0} , Winrate: {1} %", gamesPlayed, winrate);
     }
 
-    public void SetUpSimulation( int upgradepoints)
+    public void SetUpSimulation(int upgradepoints)
     {
         Party allyPartyCopy = Instantiate(GameObject.Find("AllyParty")).GetComponent<Party>();
         Party enemyParty = GenerateEnemyParty(upgradepoints);
@@ -62,7 +62,7 @@ public class SimulationRunner : MonoBehaviour
 
     public IEnumerator StartSimulationCoroutine()
     {
-        SetUpSimulation(1);
+        SetUpSimulation(0);
         bool finished = false;
         while(!finished)
         {
@@ -109,7 +109,7 @@ public class SimulationRunner : MonoBehaviour
     {
         int wins = results.Where(x => x.result.Equals(1)).Count();
         int loses = results.Where(x => x.result.Equals(2)).Count();
-        int winrate = 100 * (wins / (wins + loses));
+        float winrate = 100 * ((float)wins / (wins + loses));
 
         return (int) (winrate-targetWinrate)/2;
     }

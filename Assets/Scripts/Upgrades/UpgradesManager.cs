@@ -42,6 +42,7 @@ public class UpgradesManager : MonoBehaviour
             GenerateOptions(item.GetComponentInChildren<Creature>(), offsetX);
             offsetX -= oX;
         }
+        UpdatePoints();
     }
 
     /// <summary>

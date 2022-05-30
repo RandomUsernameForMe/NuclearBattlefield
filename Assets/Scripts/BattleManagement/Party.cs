@@ -73,7 +73,7 @@ public class Party : MonoBehaviour
                 creature.GetComponent<QueryHandler>().ProcessQuery(action);
                 CreatureStatsDescriptionPanel st = creature.GetComponentInChildren<CreatureStatsDescriptionPanel>();
                 st.UpdateUI();
-                if (item.timer == 0)
+                if (item.timer <= 0)
                 {
                     Destroy(item);
                 }

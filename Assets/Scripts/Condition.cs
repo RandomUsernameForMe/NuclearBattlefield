@@ -20,16 +20,17 @@ public abstract class CreatureCondition : Condition
 /// </summary>
 public class ComponentCondition<T> : CreatureCondition
 {
-
-
+    private bool boolHelper = true;
     public ComponentCondition(Creature creature)
     {
         this.creature = creature;
     }
-    public ComponentCondition(string name = "")
+    public ComponentCondition(string name = "",bool boolean = true)
     {
         this.name = name;
+        this.boolHelper = boolean;
     }
+
     override public bool isPassed()
     {
         if (creature == null)
@@ -38,7 +39,7 @@ public class ComponentCondition<T> : CreatureCondition
             if (temp == null) return false;
             creature = temp.GetComponent<Creature>();
         }
-        return UpgradesManager.Contains(creature.GetComponentsInChildren<Component>(), typeof(T));
+        return (!boolHelper ^ UpgradesManager.Contains(creature.GetComponentsInChildren<Component>(), typeof(T)));
     }
 }
 

@@ -33,6 +33,10 @@ public class UpgradeStorage
             positiveUpgrades[4].Upgrade.buttonText = "Improve Healing";
             positiveUpgrades[4].Upgrade.cost = 2;
             positiveUpgrades[4].Upgrade.descriptionText = "You heal for 10 more health, costs " + positiveUpgrades[4].Upgrade.cost + " points.";
+            positiveUpgrades.Add(new UpgradeWithCondition(new ComponentCondition<Armored>("",false), new ComponentCreator<Armored>()));
+            positiveUpgrades[5].Upgrade.buttonText = "Wear Armor";
+            positiveUpgrades[5].Upgrade.cost = 2;
+            positiveUpgrades[5].Upgrade.descriptionText = "You start wearing armor, costs " + positiveUpgrades[5].Upgrade.cost + " points.";
             positive = positiveUpgrades;
         }
         return positive;
