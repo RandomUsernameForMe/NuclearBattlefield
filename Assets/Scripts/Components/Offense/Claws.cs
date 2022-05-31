@@ -59,7 +59,7 @@ public class Clawed : TimedEffect
             if (action.parameters.ContainsKey(QueryParameter.Claws))
             {
                 action.parameters[QueryParameter.PhysDmg] += intensity;
-                intensity += 1; 
+                timer++;
             }
         }
         return action;
@@ -74,6 +74,7 @@ public class Clawed : TimedEffect
     internal void Set(int strength)
     {
         intensity = strength;
+        timer = 3;
     }
 }
 

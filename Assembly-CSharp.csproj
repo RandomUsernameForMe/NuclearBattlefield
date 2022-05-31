@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Components\Defense\Health.cs" />
     <Compile Include="Assets\BattleTimer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
+    <Compile Include="Assets\Scripts\ComponentCreator.cs" />
     <Compile Include="Assets\Scripts\Upgrades\UpgradeHolder.cs" />
     <Compile Include="Assets\Scripts\Condition.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
@@ -164,7 +165,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\AudioControl.cs" />
     <Compile Include="Assets\Scripts\Upgrades\DestroyerEquipUpgrade.cs" />
-    <Compile Include="Assets\Scripts\ComponentCreator.cs" />
+    <Compile Include="Assets\Scripts\Components\Offense\Executioner.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
