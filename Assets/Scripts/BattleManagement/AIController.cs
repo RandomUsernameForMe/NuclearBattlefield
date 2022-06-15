@@ -22,7 +22,7 @@ public class AIController : Controller
     /// <param name="creature"></param>
     public override void CreatureActs(Creature creature)
     {
-        
+        // theres now a 250% chance of a calculated attack
         int rnd = UnityEngine.Random.Range(0, 2);
         Query query = null; ;
         Creature target = null; ;
@@ -73,7 +73,7 @@ public class AIController : Controller
 
     public (int,int) PickActionToPlay(Creature creature)
     {
-        var query = new Query(QueryType.AttackBuild);
+        Query query; 
 
         var betterAI = true;
         if(betterAI)
@@ -100,8 +100,7 @@ public class AIController : Controller
             (int, int) maxItem = (-1,-1);
             foreach (var item in results.Keys)
             {
-                int rnd = UnityEngine.Random.Range(0, 10);
-                if (rnd > 3 && results[item] >max && !TargetingSystem.GetCreatureByPosition(item.Item2,manager).Is(QueryParameter.Dead))
+                if (results[item] >max && !TargetingSystem.GetCreatureByPosition(item.Item2,manager).Is(QueryParameter.Dead))
                 {
                     max = results[item];
                     maxItem = item;

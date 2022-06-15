@@ -73,8 +73,8 @@ public class BattleTransitions: MonoBehaviour
 
                 Instantiate(bestiary["clawer"], enemies.party[0].transform);
                 Instantiate(bestiary["clawer"], enemies.party[1].transform);
-                Instantiate(bestiary["clawer"], enemies.party[2].transform);
-                Instantiate(bestiary["clawer"], enemies.party[3].transform);
+                Instantiate(bestiary["bigger"], enemies.party[2].transform);
+                Instantiate(bestiary["bigger"], enemies.party[3].transform);
                 break;
 
             case 2:

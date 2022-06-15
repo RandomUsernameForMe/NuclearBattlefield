@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Claws : Component
+public class Claws : UpgradableComponent
 {
     public int strength;
     public override List<(Type, Type)> GetRequirements()
@@ -40,6 +40,18 @@ public class Claws : Component
         }
         return action;
     }
+
+    public override bool TryUpgrade(bool positive)
+    {
+        if (strength <= 5)
+        {
+            Destroy(this);
+            return true;
+        }
+        if (positive) strength += 5;
+        else strength -= 5;
+        return true;
+    }
 }
 
 public class Clawed : TimedEffect
@@ -60,6 +72,13 @@ public class Clawed : TimedEffect
             {
                 action.parameters[QueryParameter.PhysDmg] += intensity;
                 timer++;
+            }
+        }
+        if (action.type == QueryType.Description)
+        {
+            if (action.parameters.ContainsKey(QueryParameter.Tooltip))
+            {
+                action.Add(String.Format("Clawed: recieves extra {0} dmg, {1} turns", intensity, timer));
             }
         }
         return action;

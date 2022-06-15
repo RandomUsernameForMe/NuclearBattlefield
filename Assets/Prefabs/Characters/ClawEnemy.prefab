@@ -42,10 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 196265297375021901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e419a1a99e218d4e902e5d1bf61d3fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 1aba709afe2346e46bc8c72a0344e5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 10
+  strength: 10
 --- !u!114 &6336607827961299689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 196265297375021901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f02dde7e45c01c44ba8e1399af59f45, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f15fad5039e91c4fa54642b647a4743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   power: 15
@@ -172,6 +172,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 887144936453057130}
+    - target: {fileID: 3047627406571559239, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: armor
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6293673506591636663, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
       propertyPath: animator
       value: 

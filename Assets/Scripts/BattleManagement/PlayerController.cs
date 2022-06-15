@@ -116,6 +116,14 @@ public class PlayerController : Controller
         }        
     }
 
+    public void CancelAction()
+    {
+        manager.allyParty.ResetColors();
+        manager.enemyParty.ResetColors();
+        UIManager.GetComponent<UIManager>().LockButtons(false);
+        cancelButton.gameObject.SetActive(false);
+    }
+
     public override void CreatureActs(Creature creature)
     {
         UIManager.PrepareAbilityControlPanel(creature);

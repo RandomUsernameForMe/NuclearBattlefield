@@ -3,33 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MightyWeapon : UpgradableComponent
+public class FieryWeapons : UpgradableComponent
 {
-    public double power;
-
+    public double power = 5;
     public override Query ProcessQuery(Query action)
     {
         if (action.type == QueryType.AttackBuild)
         {
             if (action.parameters.ContainsKey(QueryParameter.Special))
             {
-                action.Add(QueryParameter.Close, 1);
-                action.Add(QueryParameter.PhysDmg, power);
-            }            
+                action.Add(QueryParameter.FireDmg, power);
+            }
+            if (action.parameters.ContainsKey(QueryParameter.Basic))
+            {
+                action.Add(QueryParameter.FireDmg, power);
+            }
         }
         if (action.type == QueryType.Description)
         {
             if (action.parameters.ContainsKey(QueryParameter.Special))
             {
-                action.Add("Smash enemy with massive strike.");
+                action.Add("Deals bonus fire damage.");
             }
-            if (action.parameters.ContainsKey(QueryParameter.SpecialName))
+            if (action.parameters.ContainsKey(QueryParameter.Basic))
             {
-                action.Add("PowerStrike");
+                action.Add("Deals bonus fire damage.");
             }
+
             if (action.parameters.ContainsKey(QueryParameter.Tooltip))
             {
-                action.Add(String.Format("PowerStrike: {0} dmg", power));
+                action.Add(String.Format("All abilities deal bonus {0} fire dmg",power));
             }
         }
 
@@ -42,13 +45,13 @@ public class MightyWeapon : UpgradableComponent
 
     public override bool TryUpgrade(bool positive)
     {
-        if (power <= 20)
+        if (power <= 5)
         {
             Destroy(this);
             return true;
         }
-        if (positive) power += 10;
-        else power -= 10;
+        if (positive) power += 5;
+        else power -= 5;
         return true;
     }
 }

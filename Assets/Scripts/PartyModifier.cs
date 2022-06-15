@@ -17,11 +17,17 @@ public class PartyModifier : MonoBehaviour
 
     public Party ModifyPartyDifficulty(Party enemyParty, int upgradePoints)
     {
+        bool makeEnemiesHarder = true;
         if (upgradePoints ==0) return enemyParty;
-        for (int i = 0; i < 5; i++)
+        if (upgradePoints <0 )
+        {
+            upgradePoints = -upgradePoints;
+            makeEnemiesHarder = false;
+        }
+        while (upgradePoints > 0)
         {
             int rnd = UnityEngine.Random.Range(0, 4);
-            ChangeDifficultyForCreature(enemyParty.party[rnd].GetComponentInChildren<Creature>(), upgradePoints > 0,ref upgradePoints);
+            ChangeDifficultyForCreature(enemyParty.party[rnd].GetComponentInChildren<Creature>(), makeEnemiesHarder,ref upgradePoints);
         }
         return enemyParty;
     }
@@ -40,13 +46,18 @@ public class PartyModifier : MonoBehaviour
         for (int i = 0; i < possibleUpgrades.Count*2; i++)
         {
             int rnd = UnityEngine.Random.Range(0, possibleUpgrades.Count);
-            var upgradeSuccesful = possibleUpgrades[rnd].TryApplyUpgrade(creature,makeEnemiesHarder);
+
+            var upgradeSuccesful = possibleUpgrades[rnd].TryApplyUpgrade(creature, makeEnemiesHarder);
             if (upgradeSuccesful)
             {
                 points -= possibleUpgrades[rnd].Upgrade.cost;
                 return;
             }
         }
+        points--;
+        return;
         
     }
+
+   
 }

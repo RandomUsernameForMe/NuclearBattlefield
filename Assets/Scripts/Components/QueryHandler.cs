@@ -36,6 +36,7 @@ public class QueryHandler : MonoBehaviour
     /// <returns>Query usually modified by status effects</returns>
     public Query ProcessQuery(Query query)
     {
+        components = new List<Component>(GetComponentsInChildren<Component>());
         //Custom sorting mechanism
         components.Sort((a, b) => (wizard.Compare(a.GetType(),b.GetType())));
 

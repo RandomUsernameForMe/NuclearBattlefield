@@ -111,6 +111,10 @@ public class StoryScreens : MonoBehaviour, IPointerClickHandler
         {
             var t = toBePlayed.Dequeue();
             GetComponent<Image>().sprite = Sprite.Create(t, new Rect(0.0f, 0.0f, t.width, t.height), new Vector2(0.5f, 0.5f), 100.0f);
-        }        
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

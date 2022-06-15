@@ -19,8 +19,8 @@ public class TargetingSystem
             {
                 case QueryParameter.Close:
                     list.Remove(0);
-                    list.Remove(2);
-                    list.Remove(5);
+                    list.Remove(1);
+                    list.Remove(6);
                     list.Remove(7);
                     break;
                 case QueryParameter.Far:

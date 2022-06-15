@@ -14,6 +14,9 @@ public class UseGeneratedEnemiesButton : MonoBehaviour
     public void LoadNextLevel()
     {
         var obj = GameObject.Find("LevelInfo");
+        var generator = GetComponent<SpriteGenerator>();
+        generator.AssignRandomSpritesToParty(nextEnemyGroup);
+
         obj.GetComponent<PartyHolder>().party = nextEnemyGroup;
         obj.GetComponent<LevelManager>().LoadLevel(1,1);
     }

@@ -37,6 +37,7 @@ public class Stun : TimedEffect
     internal void Set(int duration)
     {
         this.timer = duration;
+        active = true;
     }
 
     public override Query Tick()
@@ -51,7 +52,6 @@ class StunBuilder : ComponentBuilder
     public int duration;
     public override void BuildStatusEffect(GameObject obj)
     {
-        // TODO náhodu 
         obj.AddComponent<Stun>().Set(duration);
     }
 

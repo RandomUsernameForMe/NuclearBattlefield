@@ -37,11 +37,13 @@ public class Party : MonoBehaviour
     /// </summary>
     public void SetBattlePose()
     {
+        float Xdif = 2.5f;
+        float Zdif = 3;
         var pos = transform.position;
-        party[0].position = new Vector3(pos.x - 3, pos.y + 0, pos.z - 3);
-        party[1].position = new Vector3(pos.x - 3, pos.y + 0, pos.z + 3);
-        party[2].position = new Vector3(pos.x + 3, pos.y + 0, pos.z + 3);
-        party[3].position = new Vector3(pos.x + 3, pos.y + 0, pos.z - 3);
+        party[0].position = new Vector3(pos.x - Xdif, pos.y + 0, pos.z - Zdif);
+        party[1].position = new Vector3(pos.x - Xdif, pos.y + 0, pos.z + Zdif);
+        party[2].position = new Vector3(pos.x + Xdif, pos.y + 0, pos.z + Zdif);
+        party[3].position = new Vector3(pos.x + Xdif, pos.y + 0, pos.z - Zdif);
     }
 
     /// <summary>
@@ -69,14 +71,18 @@ public class Party : MonoBehaviour
             for (int j = 0; j < effects.Length; j++)
             {
                 var item = effects[j];
-                Query action = item.Tick();
-                creature.GetComponent<QueryHandler>().ProcessQuery(action);
-                CreatureStatsDescriptionPanel st = creature.GetComponentInChildren<CreatureStatsDescriptionPanel>();
-                st.UpdateUI();
-                if (item.timer <= 0)
+                if (item.active)
                 {
-                    Destroy(item);
-                }
+                    Query action = item.Tick();
+                    creature.GetComponent<QueryHandler>().ProcessQuery(action);
+                    CreatureStatsDescriptionPanel st = creature.GetComponentInChildren<CreatureStatsDescriptionPanel>();
+                    st.UpdateUI();
+                    if (item.timer <= 0)
+                    {
+                        Destroy(item);
+                        item.active = false;
+                    }
+                }                
             }
         }
     }   

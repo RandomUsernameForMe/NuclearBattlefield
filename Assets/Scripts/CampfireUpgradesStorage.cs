@@ -12,7 +12,7 @@ public class CampfireUpgradesStorage : MonoBehaviour
             var upgrs = new List<UpgradeWithCondition>();
             upgrs.Add(new UpgradeWithCondition(new HasValue(QueryParameter.Dead,1,""), new CampfireRevive()));
             upgrs.Add(new UpgradeWithCondition(new HasValue(QueryParameter.Dead,0, ""), new CampfireFullHeal()));
-            upgrs.Add(new UpgradeWithCondition(new ComponentCondition<MightyWeapon>(), new DestroyerEquipUpgrade()));
+            upgrs.Add(new UpgradeWithCondition(new ComponentCondition<PowerStrike>(), new DestroyerEquipUpgrade()));
             upgrades = upgrs;
         }
         return upgrades;

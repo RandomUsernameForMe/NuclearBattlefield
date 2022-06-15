@@ -31,7 +31,7 @@ public class BattleManager : MonoBehaviour
     public BattleResults results;
     public float minimalTimeBetweenMoves;
     private int skipCounter;
-    private bool arficialEnd = false;
+    private bool artificialEnd = false;
 
     private void OnEnable()
     {
@@ -54,10 +54,12 @@ public class BattleManager : MonoBehaviour
 
     public void RunOneTurn()
     {
-        if (IsGameOver() || arficialEnd)
+        if (IsGameOver() || artificialEnd)
         {
             results = GenerateBattleResults();
             running = false;
+            skipCounter = 0;
+            artificialEnd= false;
             var loader = GameObject.Find("LevelLoader");
             if (loader != null) loader.GetComponent<BattleTransitions>().HandleResults(results);
         }
@@ -72,6 +74,8 @@ public class BattleManager : MonoBehaviour
     {
         if (allyParty == null) allyParty = GameObject.Find("AllyParty").GetComponent<Party>();
         if (enemyParty == null) enemyParty = GameObject.Find("EnemyParty").GetComponent<Party>();
+        var spriteGenerator = GetComponent<SpriteGenerator>();
+        if (spriteGenerator != null) spriteGenerator.AssignSpritesToEnemyParty();
         results = null;
         enemyParty.FullReset();
         allyParty.FullReset();
@@ -82,9 +86,9 @@ public class BattleManager : MonoBehaviour
     public void CurrentCreaturSkips()
     {
         skipCounter++;
-        if (skipCounter > 3)
+        if (skipCounter > 5)
         {
-            arficialEnd = true;
+            artificialEnd = true;
         }        
         OnCharacterFinishedTurn();
     }
@@ -98,9 +102,9 @@ public class BattleManager : MonoBehaviour
     {
         if (query.type == QueryType.None)
         {
-            if (skipCounter >30)
+            if (skipCounter >5)
             {
-                arficialEnd = true;
+                artificialEnd = true;
             }
             skipCounter++;
         }
@@ -127,9 +131,7 @@ public class BattleManager : MonoBehaviour
             query.type = QueryType.Attack;
             target.GetComponent<QueryHandler>().ProcessQuery(query);
             target.UpdateUI();
-        }
-
-        
+        }        
         OnCharacterFinishedTurn();
     }
 
@@ -180,8 +182,7 @@ public class BattleManager : MonoBehaviour
                 currentCreature = nextCreature;
                 currentCreature.speed = 0;
             }
-        }       
-
+        }  
     }
 
     private BattleResults GenerateBattleResults()

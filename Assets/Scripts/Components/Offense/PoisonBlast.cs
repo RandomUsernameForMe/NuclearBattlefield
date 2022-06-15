@@ -5,7 +5,7 @@ using System;
 
 public class PoisonBlast: UpgradableComponent
 {
-    private int potency;
+    public int potency;
     public int duration;
     private int upgradeLevel;
 
@@ -98,7 +98,7 @@ public class Poison : TimedEffect
         {
             if (action.parameters.ContainsKey(QueryParameter.Tooltip))
             {
-                action.Add(String.Format("Poisioned: {0} potancy, {1} duration", potency, timer));
+                action.Add(String.Format("Poisoned: {0} dmg, {1} turns", potency, timer));
             }
         }
         return action;
@@ -116,6 +116,7 @@ public class Poison : TimedEffect
     {
         this.potency = potency;
         this.timer = duration;
+        active = true;
     }
 }
 

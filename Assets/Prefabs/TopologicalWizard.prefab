@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 289142828571905865}
   - component: {fileID: 289142828571905866}
   - component: {fileID: 289142828571905867}
-  - component: {fileID: 289142828571905876}
-  - component: {fileID: 289142828571905877}
   - component: {fileID: 289142828571905878}
   - component: {fileID: 289142828571905879}
   - component: {fileID: 289142828571905872}
@@ -83,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b729deb2cb7ef479ada16660957cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
+  power: 0
 --- !u!114 &289142828571905867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,32 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb0930dbf72ce984d81f8622ba034636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &289142828571905876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289142828571905887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f02dde7e45c01c44ba8e1399af59f45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gigaStrength: 0
---- !u!114 &289142828571905877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289142828571905887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e419a1a99e218d4e902e5d1bf61d3fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value: 0
 --- !u!114 &289142828571905878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,7 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c02e925d6ae124a9f079b844a2c1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
   duration: 0
 --- !u!114 &289142828571905872
 MonoBehaviour:
@@ -185,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08abe62512d71e04483d350c44302e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
+  armor: 3
 --- !u!114 &289142828571905875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,8 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6e44adc6e6a594789e93d54faea6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
   health: 0
+  maxHealth: 0
 --- !u!114 &289142828571905884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54fa39da0d533b84fb04124d96029bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bashStrength: 0
+  bashDmg: 0
   stunDuration: 0
   chance: 0

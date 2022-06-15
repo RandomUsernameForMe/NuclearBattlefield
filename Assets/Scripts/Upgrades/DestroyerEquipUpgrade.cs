@@ -13,7 +13,7 @@ public class DestroyerEquipUpgrade : Upgrade
 
     public override bool TryUpgrade(Creature creature, bool positive)
     {
-        GameObject.Destroy(creature.GetComponentInChildren<MightyWeapon>());
+        GameObject.Destroy(creature.GetComponentInChildren<PowerStrike>());
         creature.gameObject.AddComponent<Destroyer>();
         UpgradesManager.PayPoints(cost);
         return true;

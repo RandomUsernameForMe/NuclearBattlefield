@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c02e925d6ae124a9f079b844a2c1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  potency: 15
   duration: 2
 --- !u!114 &2337044603392904629
 MonoBehaviour:
@@ -69,10 +70,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2504197665724436345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e419a1a99e218d4e902e5d1bf61d3fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f15fad5039e91c4fa54642b647a4743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 15
+  power: 10
 --- !u!114 &3304449552724340656
 MonoBehaviour:
   m_ObjectHideFlags: 0

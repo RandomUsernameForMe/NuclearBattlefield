@@ -24,12 +24,13 @@ public class SimulationRunner : MonoBehaviour
     {
         modifier = GetComponent<PartyModifier>();
         bestiary.Add("clawer", weakEnemy);
-        bestiary.Add("stronger", strongEnemy);
+        bestiary.Add("bigger", strongEnemy);
         if (GameObject.Find("LevelInfo").GetComponent<PartyHolder>() != null)
         {
             enemyParty = GameObject.Find("LevelInfo").GetComponent<PartyHolder>().party;
             enemyParty.transform.position += new Vector3(0, -5, 0);
         }
+        StartSimulation();
     }
     
     public void ShowResults(List<BattleResults> results)
@@ -82,6 +83,7 @@ public class SimulationRunner : MonoBehaviour
             if (!finished)
             {
                 var points = CalculateUpgradePoints(results);
+                
                 manager.enemyParty = modifier.ModifyPartyDifficulty(enemyParty, points);
                 manager.LoadAndReset();                
             }
@@ -110,8 +112,8 @@ public class SimulationRunner : MonoBehaviour
         int wins = results.Where(x => x.result.Equals(1)).Count();
         int loses = results.Where(x => x.result.Equals(2)).Count();
         float winrate = 100 * ((float)wins / (wins + loses));
-
-        return (int) (winrate-targetWinrate)/2;
+        Debug.Log(String.Format("Winrate: {0}", winrate));
+        return (int) (winrate-targetWinrate)/3; //změnit počet bodů zde
     }
 
     private void SetupManager(BattleManager manager,Party party, Party enemyParty, Controller aIControl)

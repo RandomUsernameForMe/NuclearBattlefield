@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ public class UpgradesManager : MonoBehaviour
     public GameObject btnPrefab;
     public int upgPoints;
     public TextMeshProUGUI points;
+    public int MAX_UPGRADES_COUNT = 5;
 
     private void OnEnable()
     {
@@ -57,8 +59,10 @@ public class UpgradesManager : MonoBehaviour
 
         foreach (var item in upgrades)
         {
-            if (item.IsConditionPassed(creature)) viableUpgradesList.Add(item.Upgrade);
-        }        
+            if (item.IsConditionPassed(creature) && item.Upgrade.buttonText != "") viableUpgradesList.Add(item.Upgrade);
+        }
+
+        viableUpgradesList = RandomlyTrimList(viableUpgradesList); 
 
         // After all options have been generates, create desired buttons
         float offsetY = 0;
@@ -73,6 +77,16 @@ public class UpgradesManager : MonoBehaviour
             buttonObj.GetComponentInChildren<UpgradeHolder>().upg = upgrade;
             offsetY += oY;
         }
+    }
+
+    private List<Upgrade> RandomlyTrimList(List<Upgrade> list)
+    {
+        while (list.Count > MAX_UPGRADES_COUNT)
+        {
+            var rnd = new System.Random();
+            list.RemoveAt(rnd.Next(list.Count - 1));
+        }
+        return list;    
     }
 
     public static bool Contains(Component[] list, Type type)

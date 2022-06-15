@@ -13,6 +13,22 @@ public class UpgradeWithCondition
         Upgrade = upg;
     }
 
+    public UpgradeWithCondition(CreatureCondition cond, Upgrade upg,int cost, string buttonText, string descriptionText)
+    {
+        Condition = cond;
+        Upgrade = upg;
+        Upgrade.cost = cost;
+        Upgrade.buttonText = buttonText;
+        Upgrade.descriptionText = descriptionText;
+    }
+
+    public UpgradeWithCondition(CreatureCondition cond, Upgrade upg, int cost)
+    {
+        Condition = cond;
+        Upgrade = upg;
+        Upgrade.cost = cost;
+    }
+
     public bool IsConditionPassed(Creature creature)
     {
         Condition.creature = creature;
