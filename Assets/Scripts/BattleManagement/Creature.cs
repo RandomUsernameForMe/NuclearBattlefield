@@ -9,8 +9,6 @@ using UnityEngine;
 public class Creature : MonoBehaviour
 {    
     public string creatureName;
-    public int speed;
-    public int maxSpeed;
     public Controller controller;
     public bool isEnemy;
     public bool isAI;
@@ -61,14 +59,16 @@ public class Creature : MonoBehaviour
 
     public void ResetSpeed() 
     {
-        speed = maxSpeed;
+        GetComponentInChildren<Speed>().ResetSpeed();
+        
     }
 
     public int GetSpeed()
     {
-        if (Is(QueryParameter.CanAct))
+        var speedComp = GetComponentInChildren<Speed>();
+        if (Is(QueryParameter.CanAct) && speedComp != null)
         {
-            return speed;
+            return speedComp.speed;
         }
         else return 0;
     }
@@ -126,5 +126,10 @@ public class Creature : MonoBehaviour
         {
             Destroy(item);
         }
+    }
+
+    internal void PayInitiativePoints()
+    {
+        GetComponentInChildren<Speed>().PayInitiativePoints();
     }
 }

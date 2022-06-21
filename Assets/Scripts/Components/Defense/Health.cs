@@ -7,70 +7,65 @@ public class Health : UpgradableComponent
 {
     public double health;
     public int maxHealth;
-    Animator animator;
+    public Animator animator;
 
-    private void OnEnable()
-    {
-        animator = GetComponentInParent<Animator>();
-    }
     private void Update()
     {
         if (animator != null) animator.SetBool("Dead", health <= 0);
     }
 
-    override public Query ProcessQuery(Query action)
+    override public Query ProcessQuery(Query query)
     {
         double healthChange =0 ;
-        if (action.type == QueryType.Attack || action.type == QueryType.Question)
+        if (query.type == QueryType.Attack || query.type == QueryType.Question)
         {
-            if (action.parameters.ContainsKey(QueryParameter.PhysDmg))
+            if (query.parameters.ContainsKey(QueryParameter.PhysDmg))
             {
-                healthChange = -action.parameters[QueryParameter.PhysDmg];
+                healthChange = -query.parameters[QueryParameter.PhysDmg];
             }
-            if (action.parameters.ContainsKey(QueryParameter.PercentDmg))
+            if (query.parameters.ContainsKey(QueryParameter.PercentDmg))
             {
-                healthChange = -action.parameters[QueryParameter.PercentDmg] * health;
+                healthChange = -query.parameters[QueryParameter.PercentDmg] * health;
             }
-            if (action.parameters.ContainsKey(QueryParameter.TrueDmg))
+            if (query.parameters.ContainsKey(QueryParameter.TrueDmg))
             {
-                healthChange = -action.parameters[QueryParameter.TrueDmg];
+                healthChange = -query.parameters[QueryParameter.TrueDmg];
             }
-            if (action.parameters.ContainsKey(QueryParameter.Healing))
+            if (query.parameters.ContainsKey(QueryParameter.Healing))
             {
-                healthChange = Math.Min(action.parameters[QueryParameter.Healing], maxHealth-health);
+                healthChange = Math.Min(query.parameters[QueryParameter.Healing], maxHealth-health);
             }
         }
         
-        if (action.type == QueryType.Attack)
+        if (query.type == QueryType.Attack)
         {
-            health += healthChange;
+            health += healthChange;            
         }
         
-        if (action.type == QueryType.Question)
-        {
-            
-            action.Add(QueryParameter.CalcultedDmg, -healthChange);
+        if (query.type == QueryType.Question)
+        {            
+            query.Add(QueryParameter.CalcultedDmg, -healthChange);
         }
 
-        if (action.type == QueryType.Question)
+        if (query.type == QueryType.Question)
         {
-            if (action.parameters.ContainsKey(QueryParameter.CanAct) && health >= 0)
+            if (query.parameters.ContainsKey(QueryParameter.CanAct) && health > 0)
             {
-                action.parameters[QueryParameter.CanAct] = 1;
+                query.parameters[QueryParameter.CanAct] = 1;
             }
-            if (action.parameters.ContainsKey(QueryParameter.Dead) && health <= 0)
+            if (query.parameters.ContainsKey(QueryParameter.Dead) && health <= 0)
             {
-                action.parameters[QueryParameter.Dead] = 1;
+                query.parameters[QueryParameter.Dead] = 1;
             }
         }
-        if (action.type == QueryType.Description)
+        if (query.type == QueryType.Description)
         {
-            if (action.parameters.ContainsKey(QueryParameter.Tooltip))
+            if (query.parameters.ContainsKey(QueryParameter.Tooltip))
             {
-                action.Add(String.Format("Health: {0}", health));
+                query.Add(String.Format("Health: {0}", health));
             }
         }
-        return action;
+        return query;
     }
 
     public void Heal()

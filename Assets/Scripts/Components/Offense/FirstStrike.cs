@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FirstStrike : UpgradableComponent
 {
-    float intensity = 0.5f;
+    float intensity = 0.2f;
     public override List<(Type, Type)> GetRequirements()
     {
         var returnValue = new List<(Type, Type)>();

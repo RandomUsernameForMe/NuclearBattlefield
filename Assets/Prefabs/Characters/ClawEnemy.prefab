@@ -80,7 +80,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 887144936453057129}
-  - component: {fileID: 887144936453057130}
   - component: {fileID: 3733434326299585690}
   - component: {fileID: 887144936453057111}
   m_Layer: 0
@@ -107,25 +106,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &887144936453057130
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 887144936453057110}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e0997bf9a6b453c4eb2fa7404dc901a4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &3733434326299585690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,8 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creatureName: Clawer
-  speed: 1
-  maxSpeed: 1
   controller: {fileID: 0}
   isEnemy: 1
   isAI: 1
@@ -168,22 +146,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Humanoid_components
       objectReference: {fileID: 0}
+    - target: {fileID: 1714681973305922672, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: maxSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1913066452579816968, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 887144936453057130}
+      objectReference: {fileID: 0}
     - target: {fileID: 3047627406571559239, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
       propertyPath: armor
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6293673506591636663, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: health
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293673506591636663, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 887144936453057130}
+      objectReference: {fileID: 7239148730320643037}
+    - target: {fileID: 6293673506591636663, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7253368446708598256, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 887144936453057130}
+      objectReference: {fileID: 0}
     - target: {fileID: 8228595137118770235, guid: da22fc0690495aa47a58ca54a74827fd, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -239,5 +229,10 @@ PrefabInstance:
 --- !u!4 &3152767254319426432 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8673998203695748508, guid: b2d67872294d9924788867c900ea8371, type: 3}
+  m_PrefabInstance: {fileID: 6026056500900281884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7239148730320643037 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4023479319474167233, guid: b2d67872294d9924788867c900ea8371, type: 3}
   m_PrefabInstance: {fileID: 6026056500900281884}
   m_PrefabAsset: {fileID: 0}

@@ -177,10 +177,10 @@ public class BattleManager : MonoBehaviour
                 TriggerNewTurn();
             } 
             else
-            {
+            {                
                 found = true;
                 currentCreature = nextCreature;
-                currentCreature.speed = 0;
+                currentCreature.PayInitiativePoints();
             }
         }  
     }

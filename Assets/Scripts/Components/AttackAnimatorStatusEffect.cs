@@ -8,7 +8,7 @@ public class AttackAnimatorStatusEffect : Component
     public Animator animator;
     void Start()
     {
-        animator = GetComponentInParent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
     public override Query ProcessQuery(Query query)
     {

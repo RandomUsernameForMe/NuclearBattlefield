@@ -7,7 +7,7 @@ public class PoisonBlast: UpgradableComponent
 {
     public int potency;
     public int duration;
-    private int upgradeLevel;
+    private int upgradeLevel = 1;
 
     public override Query ProcessQuery(Query action)
     {
@@ -99,6 +99,20 @@ public class Poison : TimedEffect
             if (action.parameters.ContainsKey(QueryParameter.Tooltip))
             {
                 action.Add(String.Format("Poisoned: {0} dmg, {1} turns", potency, timer));
+            }
+        }
+        if (action.type == QueryType.Attack)
+        {
+            if (action.effects.ContainsKey(QueryParameter.Poison))
+            {
+                timer = Math.Max(2,timer);
+                potency = Math.Max(potency, action.effects[QueryParameter.Poison].value);
+                action.effects.Remove(QueryParameter.Poison);
+            }
+            if (action.parameters.ContainsKey(QueryParameter.PoisonAmp))
+            {
+                potency += 5;
+                timer += 1;
             }
         }
         return action;

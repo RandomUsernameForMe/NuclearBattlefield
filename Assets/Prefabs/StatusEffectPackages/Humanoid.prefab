@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 8228595137118770235}
   - component: {fileID: 6293673506591636663}
   - component: {fileID: 3047627406571559239}
-  - component: {fileID: 7253368446708598256}
-  - component: {fileID: 1913066452579816968}
+  - component: {fileID: 1714681973305922672}
   m_Layer: 0
-  m_Name: Humanoid_components
+  m_Name: Humanoid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armor: 6
---- !u!114 &7253368446708598256
+--- !u!114 &1714681973305922672
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,20 +69,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 705382051212823081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f21776fc6a3469642b5cb86bde828118, type: 3}
+  m_Script: {fileID: 11500000, guid: d0e675d3c49b55144914f7f6358cc250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
---- !u!114 &1913066452579816968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705382051212823081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92dfc50140e240541b885c759a70d89f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  speed: 0
+  maxSpeed: 3

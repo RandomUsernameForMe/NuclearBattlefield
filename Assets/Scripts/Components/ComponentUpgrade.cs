@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-internal class ComponentCreator<T> : Upgrade where T : UpgradableComponent
+internal class ComponentUpgrade<T> : Upgrade where T : UpgradableComponent
 {
-    public override bool TryUpgrade(Creature creature, bool positive)
+    public override bool TryUpgrade(Creature creature, bool positive, bool unlimitedSpace)
     {
         var comp = creature.GetComponentInChildren<T>();
         if (comp ==null )
         {
             var comps = creature.GetComponentsInChildren<UpgradableComponent>();
-            if (comps.Length >= 5) return false;
+            if (comps.Length >= 6 && !unlimitedSpace) return false;
 
             creature.gameObject.AddComponent<T>();
             return true;

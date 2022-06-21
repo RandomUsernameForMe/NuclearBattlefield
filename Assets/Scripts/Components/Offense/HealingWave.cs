@@ -42,7 +42,7 @@ public class HealingWave : UpgradableComponent
 
     public override bool TryUpgrade(bool positive)
     {
-        if (power <= 20)
+        if (power < 20)
         {
             Destroy(this);
             return true;

@@ -9,6 +9,7 @@ public class AudioControl : MonoBehaviour
     float currentTime = 0;
     float duration = 2;
     bool fade = false;
+    public float defaultVolume = 0.1f;
 
     void Start()
     {
@@ -23,12 +24,12 @@ public class AudioControl : MonoBehaviour
         if (currentTime < duration)
         {
             currentTime += Time.deltaTime;
-            aud.volume = Mathf.Lerp(0, 0.05f, currentTime / duration);
+            aud.volume = Mathf.Lerp(0, defaultVolume, currentTime / duration);
         }
 
         if (fade)
         {
-            aud.volume = Mathf.Lerp(0.3f, 0, (Time.time - currentTime) / duration);
+            aud.volume = Mathf.Lerp(defaultVolume, 0, (Time.time - currentTime) / duration);
         }
 
     }

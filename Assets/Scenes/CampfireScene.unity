@@ -387,35 +387,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextEnemyGroup: {fileID: 0}
---- !u!114 &201424901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201424898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f866fff5a1afcda46bd718f76013202d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 2100000, guid: b618f9518e9ad9140a8655a1734ce816, type: 2}
-  - {fileID: 2100000, guid: c42a6f6f162af5144a743fad5c6e8ee9, type: 2}
-  - {fileID: 2100000, guid: 6be79bfbbe17cf548bd924f602d5fbe0, type: 2}
-  - {fileID: 2100000, guid: a8367554cb7ce4249bbcd2383ec55be1, type: 2}
-  - {fileID: 2100000, guid: 4e5dfd8e1f1dcda4d928c58aef4a23a8, type: 2}
-  - {fileID: 2100000, guid: bb02a748966852c41b9b86dd2aa2d7f9, type: 2}
-  - {fileID: 2100000, guid: 4b2226e810d42c141b64ff21ab9c7753, type: 2}
-  - {fileID: 2100000, guid: c0ea7025165b9c9499e0aa2de86bb517, type: 2}
-  colors:
-  - {r: 0.6886792, g: 0, b: 0, a: 0}
-  - {r: 0.6698113, g: 0.625787, b: 0, a: 0}
-  - {r: 0.003643218, g: 0.4433962, b: 0, a: 0}
-  - {r: 0.04111784, g: 0.14072251, b: 0.7924528, a: 0}
-  - {r: 0.5566038, g: 0, b: 0.5508189, a: 0}
-  - {r: 0.509434, g: 0.26882747, b: 0.021626905, a: 0}
-  - {r: 0.46226418, g: 0.45136172, b: 0.45136172, a: 0}
 --- !u!114 &201424902 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 968472538954407528, guid: 16d63c3b8c4b31745ad32e41afb5b3e0, type: 3}
@@ -543,7 +514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &263145606
 RectTransform:
   m_ObjectHideFlags: 0
@@ -767,8 +738,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ff55a65d0c3724fa43f9a8c3694ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  descriptionRepeatLevelButton: {fileID: 4473548144906868486}
-  descriptionNextLevelButton: {fileID: 1467179881}
 --- !u!114 &270550081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1192,7 +1161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -663, y: 306}
+  m_AnchoredPosition: {x: -663, y: 613}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &746389754
@@ -1566,8 +1535,8 @@ MonoBehaviour:
   weakEnemy: {fileID: 887144936453057110, guid: a26e20b77bf8e12408c89a9d46f19dfc, type: 3}
   strongEnemy: {fileID: 1605648844365298504, guid: 62d575777c3aa9b4b857b3ae7fbd4f52, type: 3}
   enemyParty: {fileID: 0}
-  simCount: 50
-  targetWinrate: 40
+  simCount: 30
+  targetWinrate: 60
   winrateTolerance: 10
   nextLevelButton: {fileID: 201424902}
 --- !u!114 &897515115
@@ -2188,11 +2157,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oX: 300
-  oY: -80
+  oY: -60
   btnPrefab: {fileID: 2066116662342859447, guid: 7f1a8cc8ac642ac4e9567c8609fda9a6, type: 3}
   upgPoints: 10
   points: {fileID: 1823642477}
-  MAX_UPGRADES_COUNT: 5
+  MAX_UPGRADES_COUNT: 6
 --- !u!114 &1176557295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2842,7 +2811,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -471, y: 304}
+  m_AnchoredPosition: {x: -471, y: 607}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1487998021
@@ -2961,7 +2930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10cb51b1e286454492c10d21989d8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
+  manager: {fileID: 1612928102}
 --- !u!114 &1612928102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3070,7 +3039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1711112354
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3283,7 +3252,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -415.62, y: 240.91}
+  m_AnchoredPosition: {x: -415.62, y: 392}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1823642477
@@ -4193,6 +4162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b50bf35750a2614fa7c92a3faf998c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultVolume: 0.1
 --- !u!1 &718912211323572361
 GameObject:
   m_ObjectHideFlags: 0

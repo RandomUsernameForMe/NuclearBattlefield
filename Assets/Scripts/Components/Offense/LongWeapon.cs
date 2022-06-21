@@ -9,7 +9,10 @@ public class LongWeapon : Component
     {
         if (action.type == QueryType.AttackBuild)
         {
-            action.Add(QueryParameter.Enemy, 1);
+            if (action.parameters.ContainsKey(QueryParameter.Basic))
+            {
+                action.Add(QueryParameter.Enemy, 1);
+            }
         }
         if (action.type == QueryType.Description)
         {

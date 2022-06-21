@@ -196,6 +196,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5145351185800838945}
     m_Modifications:
+    - target: {fileID: 974856010349258998, guid: 84ded978c31dd714c8f2c296138b2673, type: 3}
+      propertyPath: maxSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406989465483081391, guid: 84ded978c31dd714c8f2c296138b2673, type: 3}
+      propertyPath: m_Name
+      value: Humanoid
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406989465483081391, guid: 84ded978c31dd714c8f2c296138b2673, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1895070188640540206, guid: 84ded978c31dd714c8f2c296138b2673, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -306,6 +318,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Luna
       objectReference: {fileID: 0}
+    - target: {fileID: 4259305262143972271, guid: c7929e026da23e744bbab7aed02db2ff, type: 3}
+      propertyPath: m_Name
+      value: Humanoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7929e026da23e744bbab7aed02db2ff, type: 3}
 --- !u!4 &1868619522530839306 stripped
@@ -320,6 +336,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4342498774663038136}
     m_Modifications:
+    - target: {fileID: 4476558303262578806, guid: 270be8f4b06b5424e9d767f02df24d89, type: 3}
+      propertyPath: maxSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5623820661035128139, guid: 270be8f4b06b5424e9d767f02df24d89, type: 3}
       propertyPath: m_Name
       value: Sonnie
@@ -382,6 +402,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 191404884766036992}
     m_Modifications:
+    - target: {fileID: 2445594451721410587, guid: e3279aa9995d2654783f07554d6b2e3a, type: 3}
+      propertyPath: m_Name
+      value: Humanoid
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607670760060028482, guid: e3279aa9995d2654783f07554d6b2e3a, type: 3}
+      propertyPath: maxSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7684186332602213573, guid: e3279aa9995d2654783f07554d6b2e3a, type: 3}
       propertyPath: m_RootOrder
       value: 0
