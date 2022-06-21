@@ -11,11 +11,10 @@ public class DestroyerEquipUpgrade : Upgrade
         descriptionText = "Just devastate. Costs " + cost + " to upgrade.";
     }
 
-    public override bool TryUpgrade(Creature creature, bool positive)
+    public override bool TryUpgrade(Creature creature, bool positive, bool unlimitedSpace)
     {
         GameObject.Destroy(creature.GetComponentInChildren<PowerStrike>());
         creature.gameObject.AddComponent<Destroyer>();
-        UpgradesManager.PayPoints(cost);
         return true;
     }
 }

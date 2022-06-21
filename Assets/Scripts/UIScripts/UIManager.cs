@@ -73,8 +73,10 @@ public class UIManager : MonoBehaviour
         var action = new Query(QueryType.Description);
         action.Add(QueryParameter.Basic, 0);
         action = manager.GetCurrentCreature().GetComponent<QueryHandler>().ProcessQuery(action);
+        ability_description_text.enableAutoSizing = true;
         ability_description_text.text = string.Join(" ", action.descs);
         ability_description_text.gameObject.SetActive(true);
+        ability_description_text.enableAutoSizing = true;
     }
 
     public void ShowSpecialAbilityDescription() {

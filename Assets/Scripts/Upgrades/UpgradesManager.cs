@@ -18,7 +18,7 @@ public class UpgradesManager : MonoBehaviour
     public GameObject btnPrefab;
     public int upgPoints;
     public TextMeshProUGUI points;
-    public int MAX_UPGRADES_COUNT = 5;
+    public int MAX_UPGRADES_COUNT = 7;
 
     private void OnEnable()
     {
@@ -61,8 +61,12 @@ public class UpgradesManager : MonoBehaviour
         {
             if (item.IsConditionPassed(creature) && item.Upgrade.buttonText != "") viableUpgradesList.Add(item.Upgrade);
         }
+        viableUpgradesList = RandomlyTrimList(viableUpgradesList);
 
-        viableUpgradesList = RandomlyTrimList(viableUpgradesList); 
+        var health = creature.GetHealth();
+        if (health <= 0) viableUpgradesList.Add(new CampfireRevive());
+        else if (health < creature.GetMaxHealth()) viableUpgradesList.Add(new CampfireFullHeal());
+
 
         // After all options have been generates, create desired buttons
         float offsetY = 0;
@@ -116,7 +120,7 @@ public class UpgradesManager : MonoBehaviour
 
     public void UpgradeButtonPress(Upgrade upgrade, Creature creature, GameObject buttonObj)
     {
-        var upgSuccessful = upgrade.TryUpgrade(creature,true);
+        var upgSuccessful = upgrade.TryUpgrade(creature,true,true);
         if (upgSuccessful)
         {
             PayPoints(upgrade.cost);
@@ -131,9 +135,9 @@ public class UpgradesManager : MonoBehaviour
         if (obj != null) upgPoints = obj.GetComponent<LevelInfo>().currUpgPoints;
     }
 
-    public static void PayPoints(int cost)
+    public void PayPoints(int cost)
     {
-        GameObject.Find("Upgrader").GetComponentInChildren<UpgradesManager>().upgPoints -= cost;
+        upgPoints -= cost;
         GameObject.Find("LevelInfo").GetComponent<LevelInfo>().currUpgPoints -= cost;
     }
 }

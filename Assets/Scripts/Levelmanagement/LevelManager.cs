@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     public Animator anim;
     public LevelTransitionAnimator transAnim;
     public LevelInfo info;
+    public int battle_count;
 
     private int CAMPFIRELEVEL = 2;
     private int BATTLELEVEL = 1;
@@ -47,30 +48,36 @@ public class LevelManager : MonoBehaviour
     public void LoadNextLevel()
     {
         info.ResetPointsGain();
-        if (info.currLevel != MAXLEVEL)
+        if (info.currLevel < battle_count)
         {
             info.currLevel += 1;
         }
         info.isAtCampfire = false;
+        transAnim.PlayEndLevelAnimation();
         LoadLevel(BATTLELEVEL,1);
     }
 
     internal void LoadCampFire()
     {
         info.isAtCampfire = true;
-        LoadLevel(CAMPFIRELEVEL,1);
+        if (info.currLevel == battle_count) LoadLevel(MAXLEVEL, 1);
+        else
+        {
+            transAnim.PlayEndLevelAnimation();
+            LoadLevel(CAMPFIRELEVEL, 1);
+        }
     }
 
     /// <summary>
     /// Loads a new level and transition between scenes. Transition is timed and ending animation is played. Depending on the folowing level, this evokes event delegates.
     /// </summary>
-    /// <param name="levelNum">Scene number: 1 - battle, 2 - campfire</param>
+    /// <param name="sceneNum">Scene number: 1 - battle, 2 - campfire</param>
     /// <param name="time">Time in seconds to wait before loading</param>
-    public void LoadLevel(int levelNum,float time)
+    public void LoadLevel(int sceneNum,float time)
     {
-        transAnim.PlayEndLevelAnimation();
+        
         GameObject.Find("Audio Source").GetComponent<AudioControl>().Fade(time);
-        StartCoroutine(WaitAndLoad(levelNum,time));
+        StartCoroutine(WaitAndLoad(sceneNum,time));
     }
 
     private IEnumerator WaitAndLoad(int levelNum,float time)

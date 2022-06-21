@@ -22,6 +22,7 @@ public class UpgradeHolder : MonoBehaviour
     public void OnEnter()
     {
         txt.text = upg.descriptionText;
+        txt.resizeTextForBestFit = true;
         transform.Find("DescriptionPanel").gameObject.SetActive(true);
     }
 }

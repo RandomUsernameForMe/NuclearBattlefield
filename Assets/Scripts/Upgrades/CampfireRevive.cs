@@ -11,10 +11,9 @@ public class CampfireRevive : Upgrade
         descriptionText = "Revives and fullheals character. Costs " + cost + ".";
     }
 
-    public override bool TryUpgrade(Creature creature, bool positive)
+    public override bool TryUpgrade(Creature creature, bool positive, bool unlimitedSpace)
     {
         creature.GetComponentInChildren<Health>().Heal();
-        UpgradesManager.PayPoints(cost);
         return true;
     }
 }

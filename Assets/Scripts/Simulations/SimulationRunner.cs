@@ -73,9 +73,10 @@ public class SimulationRunner : MonoBehaviour
                 while (manager.running == true)
                 {
                     manager.RunOneTurn();
-                }                
+                }
                 results.Add(manager.results);
-                ShowResults(results);
+
+                //ShowResults(results); Not needed
                 manager.LoadAndReset();
                 yield return null;
             }
@@ -104,6 +105,7 @@ public class SimulationRunner : MonoBehaviour
         int wins = results.Where(x => x.result.Equals(1)).Count();
         int loses = results.Where(x => x.result.Equals(2)).Count();
         float winrate = 100 * ((float)wins / (wins + loses));
+        Debug.Log(String.Format("Winrate: {0}", winrate));
         return (Math.Abs(targetWinrate - winrate) < winrateTolerance);
     }
 
@@ -112,7 +114,6 @@ public class SimulationRunner : MonoBehaviour
         int wins = results.Where(x => x.result.Equals(1)).Count();
         int loses = results.Where(x => x.result.Equals(2)).Count();
         float winrate = 100 * ((float)wins / (wins + loses));
-        Debug.Log(String.Format("Winrate: {0}", winrate));
         return (int) (winrate-targetWinrate)/3; //změnit počet bodů zde
     }
 

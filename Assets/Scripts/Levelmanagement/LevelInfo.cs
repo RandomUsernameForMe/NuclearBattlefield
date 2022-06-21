@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class LevelInfo : MonoBehaviour
 {
+    public bool controlGroup = false;
     public int currLevel = 0;
     public int maxUpgPointsGain = 10;
     public int currUpgPoints = 0;

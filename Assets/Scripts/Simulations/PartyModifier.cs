@@ -47,7 +47,7 @@ public class PartyModifier : MonoBehaviour
         {
             int rnd = UnityEngine.Random.Range(0, possibleUpgrades.Count);
 
-            var upgradeSuccesful = possibleUpgrades[rnd].TryApplyUpgrade(creature, makeEnemiesHarder);
+            var upgradeSuccesful = possibleUpgrades[rnd].TryApplyUpgrade(creature, makeEnemiesHarder,false);
             if (upgradeSuccesful)
             {
                 points -= possibleUpgrades[rnd].Upgrade.cost;

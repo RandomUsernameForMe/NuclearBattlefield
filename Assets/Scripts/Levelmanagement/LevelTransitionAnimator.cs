@@ -20,6 +20,7 @@ public class LevelTransitionAnimator : MonoBehaviour
 
     public void PlayEndLevelAnimation()
     {
+        var info = GetComponent<LevelInfo>();
         anim.SetTrigger("LevelEnd");
     } 
 }
