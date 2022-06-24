@@ -8,6 +8,7 @@ public class BattleTimer : MonoBehaviour
     public float minimalTimeBetweenMoves;
     float lastMove;
     bool ready = true;
+    bool readying = false;
     BattleManager manager;
 
     private void Start()
@@ -28,10 +29,15 @@ public class BattleTimer : MonoBehaviour
 
     void Update()
     {
-        if (ready && Time.time -lastMove >minimalTimeBetweenMoves)
+        if (ready)
         {
-            ready = false;
             lastMove = Time.time;
+            readying = true;
+            ready = false;
+        }
+        if (readying && Time.time -lastMove >minimalTimeBetweenMoves)
+        {
+            readying = false;
             manager.RunOneTurn();
         }
     }
