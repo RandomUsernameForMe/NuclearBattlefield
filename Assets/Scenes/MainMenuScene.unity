@@ -1544,7 +1544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b2ba7d6a8e18a4e9e48e53f45a49d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlGroup: 0
+  controlGroup: 1
   currLevel: 0
   maxUpgPointsGain: 10
   currUpgPoints: 0
@@ -1595,7 +1595,7 @@ MonoBehaviour:
   anim: {fileID: 1216754939}
   transAnim: {fileID: 1813875596}
   info: {fileID: 1257439159}
-  battle_count: 3
+  battle_count: 4
 --- !u!114 &1257439163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1623,8 +1623,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   list:
   - {fileID: 3427204856820378105, guid: b993e522c84a89e449c1f95c83f4131f, type: 3}
-  - {fileID: 3427204856820378105, guid: b993e522c84a89e449c1f95c83f4131f, type: 3}
-  - {fileID: 3427204856820378105, guid: b993e522c84a89e449c1f95c83f4131f, type: 3}
+  - {fileID: 2303060199670971480, guid: 97cdd03418f1500478e73281ab7212f9, type: 3}
+  - {fileID: 1974448510128653, guid: 9ca28ce0d535cd246b4b1ca906b0f9a3, type: 3}
 --- !u!1 &1296305650
 GameObject:
   m_ObjectHideFlags: 0

@@ -92,30 +92,30 @@ public class Poison : TimedEffect
         return null;
     }
 
-    public override Query ProcessQuery(Query action)
+    public override Query ProcessQuery(Query query)
     {
-        if (action.type == QueryType.Description)
+        if (query.type == QueryType.Description)
         {
-            if (action.parameters.ContainsKey(QueryParameter.Tooltip))
+            if (query.parameters.ContainsKey(QueryParameter.Tooltip))
             {
-                action.Add(String.Format("Poisoned: {0} dmg, {1} turns", potency, timer));
+                query.Add(String.Format("Poisoned: {0} dmg, {1} turns", potency, timer));
             }
         }
-        if (action.type == QueryType.Attack)
+        if (query.type == QueryType.Attack)
         {
-            if (action.effects.ContainsKey(QueryParameter.Poison))
+            if (query.effects.ContainsKey(QueryParameter.Poison))
             {
                 timer = Math.Max(2,timer);
-                potency = Math.Max(potency, action.effects[QueryParameter.Poison].value);
-                action.effects.Remove(QueryParameter.Poison);
+                potency = Math.Max(potency, query.effects[QueryParameter.Poison].value);
+                query.effects.Remove(QueryParameter.Poison);
             }
-            if (action.parameters.ContainsKey(QueryParameter.PoisonAmp))
+            if (query.parameters.ContainsKey(QueryParameter.PoisonAmp))
             {
                 potency += 5;
                 timer += 1;
             }
         }
-        return action;
+        return query;
     }
 
     public override Query Tick()

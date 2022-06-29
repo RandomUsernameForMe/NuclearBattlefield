@@ -912,3 +912,5 @@ C:\Users\TGJ\Documents\NuclearBattlefield\Gmefiles\NuclearBattlefield\obj\Debug\
 C:\Users\TGJ\Documents\NuclearBattlefield\Gmefiles\NuclearBattlefield\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\TGJ\Documents\NuclearBattlefield\Gmefiles\NuclearBattlefield\obj\Debug\Assembly-CSharp.dll
 C:\Users\TGJ\Documents\NuclearBattlefield\Gmefiles\NuclearBattlefield\obj\Debug\Assembly-CSharp.pdb
+C:\Users\TGJ\Documents\NuclearBattlefield\Gmefiles\NuclearBattlefield\Temp\Bin\Debug\UnityEngine.WebGLModule.dll
+C:\Users\TGJ\Documents\NuclearBattlefield\Gmefiles\NuclearBattlefield\Temp\Bin\Debug\UnityEngine.WebGLModule.pdb

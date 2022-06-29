@@ -767,7 +767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &286725401
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1675,7 +1675,7 @@ MonoBehaviour:
   weakEnemy: {fileID: 887144936453057110, guid: a26e20b77bf8e12408c89a9d46f19dfc, type: 3}
   strongEnemy: {fileID: 1605648844365298504, guid: 62d575777c3aa9b4b857b3ae7fbd4f52, type: 3}
   enemyParty: {fileID: 0}
-  simCount: 30
+  simCount: 40
   targetWinrate: 60
   winrateTolerance: 10
   nextLevelButton: {fileID: 201424902}
@@ -2331,7 +2331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1020}

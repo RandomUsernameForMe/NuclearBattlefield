@@ -6,8 +6,8 @@ public class ManMadeGroups : MonoBehaviour
 {
     public List<Party> list;
 
-    public Party GetParty(int i)
+    public Party GetPartyFromPrefab(int i)
     {
-        return list[i];
+        return Instantiate(list[i]);
     }
 }

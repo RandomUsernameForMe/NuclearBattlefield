@@ -5520,6 +5520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b50bf35750a2614fa7c92a3faf998c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultVolume: 0.1
 --- !u!1001 &1557162175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5938,7 +5939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 2101698238}
-  str: space
+  str: 8
 --- !u!1001 &1750291975
 PrefabInstance:
   m_ObjectHideFlags: 0

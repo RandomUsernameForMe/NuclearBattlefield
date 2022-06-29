@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WinCheat : MonoBehaviour
+public class Cheating : MonoBehaviour
 {
     public GameObject obj;
     public string str;

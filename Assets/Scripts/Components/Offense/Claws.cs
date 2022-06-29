@@ -64,24 +64,25 @@ public class Clawed : TimedEffect
         return returnValue;
     }
 
-    public override Query ProcessQuery(Query action)
+    public override Query ProcessQuery(Query query)
     {
-        if (action.type == QueryType.Attack)
+        if (query.type == QueryType.Attack)
         {
-            if (action.parameters.ContainsKey(QueryParameter.Claws))
+            if (query.parameters.ContainsKey(QueryParameter.Claws))
             {
-                action.parameters[QueryParameter.PhysDmg] += intensity;
+                query.parameters[QueryParameter.PhysDmg] += intensity;
                 timer++;
+                query.effects.Remove(QueryParameter.Claws);
             }
         }
-        if (action.type == QueryType.Description)
+        if (query.type == QueryType.Description)
         {
-            if (action.parameters.ContainsKey(QueryParameter.Tooltip))
+            if (query.parameters.ContainsKey(QueryParameter.Tooltip))
             {
-                action.Add(String.Format("Clawed: recieves extra {0} dmg, {1} turns", intensity, timer));
+                query.Add(String.Format("Clawed: recieves extra {0} dmg, {1} turns", intensity, timer));
             }
         }
-        return action;
+        return query;
     }
 
     public override Query Tick()

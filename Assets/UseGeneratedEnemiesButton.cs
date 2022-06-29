@@ -17,8 +17,11 @@ public class UseGeneratedEnemiesButton : MonoBehaviour
         var levelInfo = obj.GetComponent<LevelInfo>();
         if (levelInfo.controlGroup)
         {
-            levelInfo.currLevel++;
-            obj.GetComponent<PartyHolder>().party = obj.GetComponent<ManMadeGroups>().GetParty(levelInfo.currLevel);
+            var partyholder = obj.GetComponent<PartyHolder>();
+            partyholder.party = obj.GetComponent<ManMadeGroups>().GetPartyFromPrefab(levelInfo.currLevel-1);
+            partyholder.party.transform.position = new Vector3(5, -5, 0);
+            DontDestroyOnLoad(partyholder.party);
+            Destroy(nextEnemyGroup);
         }
         else
         {
